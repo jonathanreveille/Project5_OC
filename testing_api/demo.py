@@ -6,9 +6,9 @@ import requests
 #Si on veut trouver les 50 produits les plus populaires de Lindt
 
 payload = {"search_terms": "Herta",
-            "search_tag": "brands", 
+            "search_tag": "origins", 
             "sort_by": "unique_scans_n", # popularité
-            "page_size": 10,
+            "page_size": 500,
             "json": 1}
 res = requests.get("https://fr.openfoodfacts.org/cgi/search.pl?", params=payload)
 
@@ -24,6 +24,7 @@ products = results["products"]
 
 print("voir le nombre d'attribut du produit")
 len(products)
+print("^^^VOICI LE NOMBRE D'ATTRIBUT DU PRODUIT ^^^")
 
 # Et afficher leurs noms
 for product in products:
