@@ -4,7 +4,7 @@
 from peewee import MySQLDatabase
 from settings.constants import NAME_DB, USER, PASSWORD, HOST, PORT, CHARSET
 
-db = peewee.MySQLDatabase(NAME_DB, user=USER, password=PASSWORD,
+db = MySQLDatabase(NAME_DB, user=USER, password=PASSWORD,
 host=HOST, port=PORT, charset=CHARSET)
 
 
