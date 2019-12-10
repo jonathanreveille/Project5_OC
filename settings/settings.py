@@ -15,7 +15,7 @@ CHARSET = 'utf8mb4'
 
 
 # To download different data from different - Categories
-CATEGORY = ["pizza", "frommage", "jus de fruit", "confiture"]
+CATEGORY = ["pizza", "frommage", "jus de fruit", "confiture","riz"]
 
 #keywords
 KEYWORDS = ["product_name_fr", "main_category_fr", "nutrition_grade_fr", "id", "brands", "stores"]
