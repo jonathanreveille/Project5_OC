@@ -9,7 +9,7 @@ class Product:
 
     def __init__(self, **article):
         self.product_name_fr = article["product_name_fr"]
-        self.stores = article["store"]
+        self.stores = article["stores"]
         self.nutrition_grade = article["nutrition_grade_fr"]
         self.id = article["id"]
         self.brand = article["brands"]
