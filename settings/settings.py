@@ -13,12 +13,23 @@ HOST = '127.0.0.1'
 PORT = 3306
 CHARSET = 'utf8mb4'
 
-
-# To download different data from different - Categories
+#To download different data from different - Categories
 CATEGORY = ["pizza", "frommage", "jus de fruit", "confiture","riz"]
-
-#keywords
-KEYWORDS = ["product_name_fr", "main_category_fr", "nutrition_grade_fr", "id", "brands", "stores"]
 
 #Parameter of page size for collecting data from the API 
 SIZE = 10
+
+#Parameters for the URL to connect to OFF API
+PARAMS = {"action" : "process",
+            "tagtype_0" : "categories",
+            "tag_contains_0" : "contains",
+            "tag_0" : CATEGORY,
+            "sort_by": "unique_scans_n",
+            "page_size" : SIZE,
+            "json" : 1
+        } 
+
+#Keywords
+KEYWORDS = ["product_name_fr", "main_category_fr", "nutrition_grade_fr", "id", "brands", "stores"]
+
+
