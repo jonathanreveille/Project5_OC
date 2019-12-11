@@ -1,75 +1,109 @@
-#! /usr/bin/env python3
-# coding : utf-8
-
-""" The aim of this module is to get all the products from the API,
-and clean all the data"""
-
 import requests
-from settings.settings import CATEGORY, SIZE, PARAMS
+from settings.settings import CATEGORIES
 
 
-class LoadingProductByCategory:
-    """ This class will allow us to 'get' from the API
-    response with data in .json format """
+class ProductDownload:
+    """ This class has the responsibility to download data from
+    OpenFoodFact API """
 
     def __init__(self):
-        
-        self.url = "https://fr.openfoodfacts.org/cgi/search.pl"
-        self.params = PARAMS #those are the parameters to customize what follows the URL, in settings
-        
-    def get_product_by_category(self):
-        """ This method allows us to customize the URL 
-        for our get requests at the OFF API """
+        self._url = "https://fr.openfoodfacts.org/cgi/search.pl"
+        for category in CATEGORIES:
+            self._params = {
+                "action": "process",
+                "tagtype_0": "categories",
+                "tag_contains_0": "contains",
+                "tag_0": category, #name of products (large)
+                "sort_by": "unique_scans_n",
+                "page_size": 100,
+                "json": 1
+                }
 
-        for category in list(CATEGORY):
-            self.params["tag_0"] = category
+    def check_connexion(self):
+        """This method is to download all data needed 
+        from the URL, output = if <Response 200>params and url are set well """
 
-        self.params["page_size"] = SIZE
+        self.response = requests.get(self._url, params=self._params)
+        print(self.response)
+
+
+    def get_product_list(self):
+        """ This method is to transform what we received 
+        from the API into a .json format into a mutable list"""
+
+        self.data_product = self.response.json() #put the .json into self.data_product
+        print(type(self.data_product))
         
-        response = requests.get(self.url, params=self.params) # We apply the 'get' method to gather the data we want according to the parameters
-        
-        self.data_dict = response.json() #We will now transform our response into a .json format
+        self.product_list = [] #empty list
 
-        list_of_products = [] #empty list which will take all the data in
+        self.product_list = self.data_product["products"]
+        print(type(self.product_list))
 
-        for product in self.data_dict["products"]:
-            list_of_products.append(product) # we  add our products into our list_of_products
-            print(list_of_products) #test
+        for product in self.product_list:
+            print(product["product_name"], product["code"], product["stores"], product["categories"], product["url"])
+
+            #working here NOW 
+
+
+
             
-            return self.data_dict["products"]
+
+        #for product in self.product_list:
+            #WORKS : print(product["product_name"], product["code"], product["url"])
+        
+        #product_downloaded = [] #Empty list to stock data of products
+        #product_downloaded.append(self.data_product["products"]) # add those data into a list
+
+        #return product_downloaded #returns a list
+
+        # return self.data_product # this is a dictionnary
+
+        #for product in self.data_product["products"]:
+            #product["products"] = product
+            #self.product_downloaded.append(product)
+
+    def clean_data_product(self):
+        """ This method is to clean all the data that 
+        we gathered from .json data.
+        We will eliminate all products that has None 
+        values in our parameters """
+        #for product in self.product_downloaded[0]:
+            #print(product)
+        pass
+        
+        
 
 
-    def check_connexion_to_API(self):
-        """ Method to check if url and parameters are set well """
-        response = requests.get(self.url, params=self.params)
-        print(response) # show me if the return is 200
 
 
 def main():
-    download_data = LoadingProductByCategory()
-    download_data.check_connexion_to_API()
-    download_data.get_product_by_category()
-    
-    #products = []
-    #products.download_data(CATEGORY, SIZE)
+    data = ProductDownload()
+    data.check_connexion()
+    data.get_product_list()
+    data.clean_data_product()
 
 if __name__ == "__main__":
     main()
 
 
-        #for product in products:
-            #print(product["brands"])
+       # if "nutrition_grade_fr" in self.product_list[0]:
+            #print("True for nutrition")  --> TRUE
+       # else:
+            #print('Nutrition is not present')
+##
+        #if "product_name" in self.product_list[0]:
+           # print("TRUE for product_name") --> TRUE
+       # else:
+           # print("FALSE for product_name")
 
+        #if "code" in self.product_list[0]:
+           # print("TRUE for code") --> TRUE
+        #else:
+            #print("FALSE for code")
 
-##data = response.json()
+        #if "stores" in self.product_list[0]:
+            #print("TRUE for stores")  --> TRUE
+        #else:
+            #print("FALSE for stores") 
 
-#Nous sauvegarderons les données des produits récupérés
-# dans la variable 'product' qui est une liste
-##products = []
-
-#On fait une boucle POUR les produits DANS data["clé"]: (.json)
-#On ajoute ses données dans la liste 'products'
-
-
-##for product in products:
-    ##print(product["brands"])
+        # BUT I CAN'T USE IT TO SELECT DATA FROM THE .JSON file that has been transformed into a list
