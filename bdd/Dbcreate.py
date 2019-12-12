@@ -32,7 +32,7 @@ class Brand(Base):
 class Product(Base):
     code = BigIntegerField(unique=True)
     product_name = CharField(max_length=55, null=False)
-    ingredients = TextField()
+    #ingredients = TextField()
     url_name = CharField(max_length=255, null=False)
     category = ForeignKeyField(Category, backref="category")
     nutriscore = CharField(max_length=1, null=False)

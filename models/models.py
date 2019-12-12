@@ -91,7 +91,6 @@ class Brand:
         f"Brand(name: {self.name})"
 
 
-
 def main():
     pass
 
