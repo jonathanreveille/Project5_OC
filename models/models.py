@@ -5,26 +5,57 @@
 class Product:
     """ This class contains all information about product """
 
-    def __init__(self, code, url, product_name, stores, brands, nutrition_grade_fr, description, category, **kwargs):
+    def __init__(self, code, url, product_name, stores, brands, nutrition_grade_fr, ingredients, categories, **kwargs):
         
         self.code = code
         self.name = product_name
-        self.description = description
         self.url = url
         self.brands = brands
         self.nutrition_grade = nutrition_grade_fr
-        self.category = category
-        # Table association ?
+        self.category = []
+        self.ingredients = ingredients
+        # Table association ProductStore?
         self.stores = []
 
-        for category in category.split(","):
-            self.stores.append(Category(category.name.lower().strip()))
-
         for store in stores.split(","):
-            self.stores.append(Store(store.name.lower().strip()))
+            self.stores.append(Store(store.lower().strip()))
+        
+        for category in categories.split(","):
+            self.category.append(Category(category.lower().strip()))
 
     def __repr__(self):
         return f"Product(name: {self.name})"
+
+
+    def is_valid(self, product, **kwargs):
+        """ This method is to check if our list has all the data entries we need to create our objects """
+
+        is_valid = True
+
+        parameters = ("product_name","nutrition_grade_fr",\
+                "categories", "code", "stores", "brands",\
+                "code", "url")
+
+        for parameter in parameters:
+        
+            if parameter not in product or not product[parameter]:# We check if we have the corresponding keys (parameters) in dict
+                is_valid = False
+                break
+
+            if not product[parameter]:  # On vérifie que ça contient un truc
+                is_valid = False
+                break
+
+        return is_valid
+
+
+    # for parameter in parameters:
+    #     if parameter not in product or not product[parameter]:
+    #         not_valid_products.append(product)
+    #         print("-->DEBUGGING", product.get('product_name'), f"{parameter} not present or empty")
+    #         return False
+    #     else:
+    #         return True
 
 
 class Store: 
@@ -60,3 +91,9 @@ class Brand:
         f"Brand(name: {self.name})"
 
 
+
+def main():
+    pass
+
+if __name__ == "__main__":
+    pass

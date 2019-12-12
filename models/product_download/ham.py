@@ -40,7 +40,7 @@ class ProductDownloadHam:
         self.products_list = self.data_product["products"]
 
         for product in self.products_list:
-            print(product["nutrition_grade_fr"], product["brands"] product["product_name"], product["categories"], product["code"], product["stores"], product["url"])
+            print(product["nutrition_grade_fr"], product["brands"], product["product_name"], product["categories"], product["code"], product["stores"], product["url"])
 
 
     def clean_data_product(self):
