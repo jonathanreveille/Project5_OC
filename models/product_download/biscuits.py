@@ -17,57 +17,86 @@ class ProductDownloadBiscuit:
             "tag_contains_0": "contains",
             "tag_0": "biscuits",
             "sort_by": "unique_scans_n",
-            "page_size": 500, #need to implement cleaning method to go above 90 for Pizza
+            "page_size": 50, #need to implement cleaning method to go above 90 for Pizza
             "json": 1
             }
 
 
     def check_connexion(self):
-        """This method is to download all data needed 
-        from the URL, output = if <Response 200>params and url are set well """
-
+        """ This method is to download all data needed 
+        from the URL, output = if <Response 200>params 
+        and url are set well """
+        
+        connexion = True
         self.response = requests.get(self._url, params=self._params)
-        if False:
+
+        if connexion == False:
             print("<<Not connected to API>>")
         else:
             print("<<Connected to API>>")
             return self.response
 
 
-    def get_product_list(self):
+    def get_data_from_API(self):
         """ This method is to transform what we received 
         from the API into a .json format into a mutable list"""
 
-        self.data_product = self.response.json() #put the .json into self.data_product
-        #DEBUG print(type(self.data_product)) #dict
-        
+        self.data_product = self.response.json() #put the .json into self.data_product (data_prod =dict)
+
+        return self.data_product
+
+
+    def get_product_list(self):
+        """  This method is to  add to our product list
+        only the keys that we need. """
+
         self.products_list = []
 
-        self.products = self.data_product["products"]
+        self.products_dict = self.data_product["products"]
 
-        for product in self.products:
-            try:
-            #self.products_list.append(product)
-                self.products_list.append(Product(**product))
+        for product in self.products_dict:
+            self.products_list.append(product["nutrition_grade_fr"])
+            self.products_list.append(product["product_name"])
+            self.products_list.append(product["categories"])
+            self.products_list.append(product["code"])
+            self.products_list.append(product["stores"])
+            self.products_list.append(product["url"])
+
+        return self.products_list
+            #^^^THIS WORKS
+
+    def cleaning_product_list(self):
+        """ Nous regardons si dans la liste de produit nous avons bien les champs cherchés;
+        Si les champs sont pas présent: retourne False
+        Si les champs sont présent : retourne True
+        Vérifier  si les champs des produits ne sont pas vides """
+
+        self.cleaned_product_list = [] # liste vide
+
+        #boucle, pour chaque produit dans ma liste de produit
+        for product in self.products_list:
+
+            try: 
+                self.cleaned_product_list.append(Product(**product))
+                
             except TypeError as e:
-                print("Type of error : ", e)
+                print("TypeError, missing a parameter...", e)
+                break
 
-            return self.products_list
-
+            return self.cleaned_product_list
 
 
 class Product:
     """ This class contains all information about product """
 
-    def __init__(self, code, url, product_name, stores, brands, nutrition_grade_fr, ingredients, categories, **kwargs):
+    def __init__(self, code, product_name, url, brands, nutrition_grade_fr, categories, stores, **kwargs):
         
         self.code = code
         self.name = product_name
         self.url = url
         self.brands = brands
-        self.nutrition_grade = nutrition_grade_fr
-        self.category = []
-        self.ingredients = ingredients
+        self.nutriscore = nutrition_grade_fr
+        self.categories = []
         # Table association ProductStore?
         self.stores = []
 
@@ -75,33 +104,13 @@ class Product:
             self.stores.append(Store(store.capitalize().strip()))
         
         for category in categories.split(","):
-            self.category.append(Category(category.capitalize().strip()))
+            self.categories.append(Category(category.capitalize().strip()))
 
 
     def __repr__(self):
-        return f"Product(name: {self.name})"
 
+        return f"Product(name: {self.name}, {self.brands})"
 
-    def is_valid(self, product, **kwargs):
-        """ This method is to check if our list has all the data entries we need to create our objects """
-
-        is_valid = True
-
-        parameters = ("product_name","nutrition_grade_fr",\
-                "categories", "code", "stores", "brands",\
-                "code", "url")
-
-        for parameter in parameters:
-        
-            if parameter not in product or not product[parameter]:# We check if we have the corresponding keys (parameters) in dict
-                is_valid = False
-                break
-
-            if not product[parameter]:  # On vérifie que ça contient un truc
-                is_valid = False
-                break
-
-        return is_valid
 
 
 class Store: 
@@ -144,8 +153,9 @@ class Brand:
 def main():
     data = ProductDownloadBiscuit()
     data.check_connexion()
+    data.get_data_from_API()
     data.get_product_list()
-    #data.cleaning_product_list()
+    data.cleaning_product_list()
 
 if __name__ == "__main__":
     main()
@@ -160,27 +170,7 @@ if __name__ == "__main__":
             #     product["stores"], product["url"], product["ingredients"])
             #     # ==> return the list of downloaded product
 
-    # def cleaning_product_list(self):
-    #     """ 
-    #     Nous regardons si dans la liste de produit nous avons bien les champs cherchés;
-    #     Si les champs sont pas présent: retourne False
-    #     Si les champs sont présent : retourne True
-    #     Vérifier  si les champs des produits ne sont pas vides
-    #     """
-    #     self.cleaned_product_list = [] # liste vide
 
-    #     #boucle, pour chaque produit dans ma liste de produit
-    #     for product in self.products_list:
-    #         try: 
-    #             # ajoute les produits dans ma liste "propre" de produit où les infos sont remplies(avec toute les données nécéssaires
-    #             # on ajoute les produits triés et on les créer avec la class Product
-    #             # si erreur (traduction : si manquant) alors exception levée
-    #             self.cleaned_product_list.append(Product(**product)) 
-    #         except TypeError as e:
-    #             print("TypeError, missing a value maybe...", e)
-
-    #         print(self.cleaned_product_list)
-    #         return self.cleaned_product_list
 
 
 
