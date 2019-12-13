@@ -23,39 +23,9 @@ class Product:
         for category in categories.split(","):
             self.category.append(Category(category.lower().strip()))
 
+
     def __repr__(self):
         return f"Product(name: {self.name})"
-
-
-    def is_valid(self, product, **kwargs):
-        """ This method is to check if our list has all the data entries we need to create our objects """
-
-        is_valid = True
-
-        parameters = ("product_name","nutrition_grade_fr",\
-                "categories", "code", "stores", "brands",\
-                "code", "url")
-
-        for parameter in parameters:
-        
-            if parameter not in product or not product[parameter]:# We check if we have the corresponding keys (parameters) in dict
-                is_valid = False
-                break
-
-            if not product[parameter]:  # On vérifie que ça contient un truc
-                is_valid = False
-                break
-
-        return is_valid
-
-
-    # for parameter in parameters:
-    #     if parameter not in product or not product[parameter]:
-    #         not_valid_products.append(product)
-    #         print("-->DEBUGGING", product.get('product_name'), f"{parameter} not present or empty")
-    #         return False
-    #     else:
-    #         return True
 
 
 class Store: 
@@ -96,3 +66,29 @@ def main():
 
 if __name__ == "__main__":
     pass
+
+
+
+
+    # @classmethod
+    # def is_valid(cls, product):
+    #     """ This method is to check if our product is valid
+    #     according to the parameters we want """
+
+    #     parameters = ("nutrition_grade_fr","product_name",\
+    #         "code", "brands","stores","url")
+
+    #     for parameter in parameters:
+
+    #         if parameter not in product or not product[parameter]:
+    #             return False
+    #     return True
+
+
+    # for parameter in parameters:
+    #     if parameter not in product or not product[parameter]:
+    #         not_valid_products.append(product)
+    #         print("-->DEBUGGING", product.get('product_name'), f"{parameter} not present or empty")
+    #         return False
+    #     else:
+    #         return True

@@ -1,17 +1,19 @@
 #! /usr/bin/env python3
 # coding : utf-8
 
+from models.models import Product
+
 import requests
 
 
-class ProductDownloadBiscuit:
+class ProductDownload:
     """ This class has the responsibility to download data from
     OpenFoodFact API """
 
     def __init__(self):
-        self._url = "https://fr.openfoodfacts.org/cgi/search.pl"
+        self.url = "https://fr.openfoodfacts.org/cgi/search.pl"
 
-        self._params = {
+        self.params = {
             "action": "process",
             "tagtype_0": "categories",
             "tag_contains_0": "contains",
@@ -21,17 +23,18 @@ class ProductDownloadBiscuit:
             "json": 1
             }
 
-
     def check_connexion(self):
         """ This method is to download all data needed 
         from the URL, output = if <Response 200>params 
         and url are set well """
         
         connexion = True
-        self.response = requests.get(self._url, params=self._params)
+
+        self.response = requests.get(self.url, params=self.params)
 
         if connexion == False:
             print("<<Not connected to API>>")
+
         else:
             print("<<Connected to API>>")
             return self.response
@@ -45,149 +48,108 @@ class ProductDownloadBiscuit:
 
         return self.data_product
 
-    
-    def get_product_list(self):
+
+    def get_product_list(self): 
         """  This method is to  add to our product list
-        only the keys that we need. """
+        only the values from the keys that we need. """
 
         self.product_list = []
     
         for product in self.data_product["products"]:
-            #self.product_list.append(product["nutrition_grade_fr"])
-            #self.product_list.append(product["product_name"])
-            #self.product_list.append(product["code"])
-            #self.product_list.append(product["brands"])
-            self.product_list.append(product["stores"])
-            #self.product_list.append(product["url"])`
-            #self.product_list.append(product["categories"])
-        #print(self.product_list)
+            #self.product_list.append(product["nutrition_grade_fr"]) #causes problems ...
+            self.product_list.append(product["product_name"])
+            self.product_list.append(product["code"])
+            self.product_list.append(product["brands"])
+            self.product_list.append(product["stores"]) #need to seperate stores .split() .strip()
+            self.product_list.append(product["url"])
+            #self.product_list.append(product["categories"]) causes problems
 
-        return self.product_list
+        print(self.product_list) #DEBUGGING : to check what is 'récolté' in self.product_list
 
+        return self.product_list #elements we seek for exists
 
+    
     def is_valid(self, product):
-        """ This method is to check if our list has all the data entries we need to create our objects """
+        """ This method is to check if all the data that 
+        we need are present and also, not empty """
+        # vérifier que les données sont là,
+        # vérifier si elles contiennent une donnée
 
         is_valid = True
 
-        parameters = ("product_name","nutrition_grade_fr",\
-                "categories", "code", "stores", "brands",\
-                "code", "url")
+        fields = ("product_name", "code", "brands", "stores", "url")
 
-        for parameter in parameters:
-        
-            if parameter not in product or not product[parameter]:# We check if we have the corresponding keys (parameters) in dict
-                is_valid = False
-                break
+        for field in fields:
 
-            if not product[parameter]:  # On vérifie que ça contient un truc
-                is_valid = False
-                break
+            if field not in self.data_product or self.data_product[field]:
+                return is_valid == False
 
-            else:
-                return is_valid
+            return is_valid == True
+
+                #print("DEBBUG", self.data_product.get("product_name"), "--> missing data on field :" f"{field}")
 
 
-    def cleaning_product_list(self):
-        """ Nous regardons si dans la liste de produit nous avons bien les champs cherchés;
-        Si les champs sont pas présent: retourne False
-        Si les champs sont présent : retourne True
-        Vérifier  si les champs des produits ne sont pas vides """
+    def get_cleaned_list(self):
+        """This method is to check """
 
-        self.cleaned_product_list = [] # liste vide
+        self.cleaned_product = []
 
-        #boucle, pour chaque produit dans ma liste de produit
-        for product in self.product_list:
+        for product in self.data_product["products"]:
 
-            try: 
+            if not is_valid(product):
+                continue
+                print("DEBUG", self.data_product.get('product_name'), "is present and has all info")
+
+            if is_valid(product) == True:
             
-                self.cleaned_product_list.append(Product(**product))
+                self.cleaned_product.append(Product(**product))
 
-            except TypeError as e:
-                print("TypeError, missing a parameter...", e)
-                break
+                
 
-            return self.cleaned_product_list
+        return self.cleaned_product
 
 
+# class ProductCleaner:
 
-### CLASS PRODUCT ###
-class Product:
-    """ This class contains all information about product """
+#     def __init__(self, products):
+#         self.products = products
+#         self.fields_to_keep = ["product_name", "code", "brands", "stores", "url"]
+#         self.product_cleaned = []
 
-    def __init__(self, code, product_name, url, brands, nutrition_grade_fr, categories, stores, **kwargs):
-        
-        self.code = code
-        self.name = product_name
-        self.url = url
-        self.brands = brands
-        self.nutriscore = nutrition_grade_fr
-        self.categories = []
-        # Table association ProductStore?
-        self.stores = []
+#     def clean_product(self, products):
+#         """ this method is to clean data from our list of data
+#         delete from list fields that are not present
+#         delete from list fields that have None value """
 
-        for store in stores.split(","):
-            self.stores.append(Store(store.capitalize().strip()))
-        
-        for category in categories.split(","):
-            self.categories.append(Category(category.capitalize().strip()))
-
-
-    def __repr__(self):
-
-        return f"Product(name: {self.name}, {self.brands})"
+#         for product in products:
+            
+#             if set(self.fields_to_keep) <= set(product):
+#                 if all([value for key, value in product.items() if key in self.fields_to_keep]):
+#                     self.product_cleaned.append(
+#                         {"code": product["code"],
+#                         "name": product["product_name"],
+#                         "nutriscore": product["nutrition_grade_fr"],
+#                         "brands": product["brands"],
+#                         "stores": product["stores"],
+#                         "url": product["url"]}
+#                         )
 
 
 
-class Store: 
-    """ This class contains all information 
-    about stores """
-
-    def __init__(self, store):
-        self.name = store
-
-    def __repr__(self):
-        f"Store (name: {self.name})"
 
 
-
-class Category:
-    """ This class contains all the information 
-    about Categories """
-
-    def __init__(self, category):
-        self.name = category
-
-    def __repr__(self):
-        f"Category (name: {self.name})"
-
-
-
-class Brand:
-    """ This class contains all the information 
-    about the Brands"""
-
-    def __init__(self, brand):
-        self.name = brand
-
-    def __repr__(self):
-        f"Brand(name: {self.name})"
 
 
 
 
 def main():
-    data = ProductDownloadBiscuit()
-    data.check_connexion()
-    data.get_data_from_API()
-    data.get_product_list()
-    data.cleaning_product_list()
+    a = ProductDownload
+    a.check_connexion()
+    a.get_data_from_API()
+    a.get_product_list()
 
 if __name__ == "__main__":
     main()
-
-
-
 
 
             # print("DEBUG", \
