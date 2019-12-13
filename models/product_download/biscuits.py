@@ -17,7 +17,7 @@ class ProductDownloadBiscuit:
             "tag_contains_0": "contains",
             "tag_0": "biscuits",
             "sort_by": "unique_scans_n",
-            "page_size": 50, #need to implement cleaning method to go above 90 for Pizza
+            "page_size": 100, #need to implement cleaning method to go above 90 for Pizza
             "json": 1
             }
 
@@ -45,25 +45,48 @@ class ProductDownloadBiscuit:
 
         return self.data_product
 
-
+    
     def get_product_list(self):
         """  This method is to  add to our product list
         only the keys that we need. """
 
-        self.products_list = []
+        self.product_list = []
+    
+        for product in self.data_product["products"]:
+            #self.product_list.append(product["nutrition_grade_fr"])
+            #self.product_list.append(product["product_name"])
+            #self.product_list.append(product["code"])
+            #self.product_list.append(product["brands"])
+            self.product_list.append(product["stores"])
+            #self.product_list.append(product["url"])`
+            #self.product_list.append(product["categories"])
+        #print(self.product_list)
 
-        self.products_dict = self.data_product["products"]
+        return self.product_list
 
-        for product in self.products_dict:
-            self.products_list.append(product["nutrition_grade_fr"])
-            self.products_list.append(product["product_name"])
-            self.products_list.append(product["categories"])
-            self.products_list.append(product["code"])
-            self.products_list.append(product["stores"])
-            self.products_list.append(product["url"])
 
-        return self.products_list
-            #^^^THIS WORKS
+    def is_valid(self, product):
+        """ This method is to check if our list has all the data entries we need to create our objects """
+
+        is_valid = True
+
+        parameters = ("product_name","nutrition_grade_fr",\
+                "categories", "code", "stores", "brands",\
+                "code", "url")
+
+        for parameter in parameters:
+        
+            if parameter not in product or not product[parameter]:# We check if we have the corresponding keys (parameters) in dict
+                is_valid = False
+                break
+
+            if not product[parameter]:  # On vérifie que ça contient un truc
+                is_valid = False
+                break
+
+            else:
+                return is_valid
+
 
     def cleaning_product_list(self):
         """ Nous regardons si dans la liste de produit nous avons bien les champs cherchés;
@@ -74,11 +97,12 @@ class ProductDownloadBiscuit:
         self.cleaned_product_list = [] # liste vide
 
         #boucle, pour chaque produit dans ma liste de produit
-        for product in self.products_list:
+        for product in self.product_list:
 
             try: 
+            
                 self.cleaned_product_list.append(Product(**product))
-                
+
             except TypeError as e:
                 print("TypeError, missing a parameter...", e)
                 break
@@ -86,6 +110,8 @@ class ProductDownloadBiscuit:
             return self.cleaned_product_list
 
 
+
+### CLASS PRODUCT ###
 class Product:
     """ This class contains all information about product """
 
@@ -172,6 +198,21 @@ if __name__ == "__main__":
 
 
 
+# is_valid = True 
+#         for product in self.products_list:
+#             for parameter in parameters:
+#                 try:
+#                     if parameter not in product or not product[parameter]:
+#                         return is_valid == False
+
+#                     elif parameter in product or product[parameter]:
+#                         self.cleaned_list.append(Product(**product))
+
+#                 except TypeError as e:
+#                     print(f"TypeError, missing a parameter for product...{parameter}", e)
+#                     break
+            
+#                 return self.cleaned_list
 
 
 
