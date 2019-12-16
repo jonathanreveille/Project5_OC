@@ -3,7 +3,7 @@
 
 import requests
 
-class ProductDownloadBiscuit:
+class ProductDownloadJam:
     """ This class has the responsibility to download data from
     OpenFoodFact API """
 
@@ -14,7 +14,7 @@ class ProductDownloadBiscuit:
             "action": "process",
             "tagtype_0": "categories",
             "tag_contains_0": "contains",
-            "tag_0": "biscuits",
+            "tag_0": "confiture",
             "sort_by": "unique_scans_n",
             "page_size": 100, #need to implement cleaning method to go above 90 for Pizza
             "json": 1
@@ -48,13 +48,11 @@ class ProductDownloadBiscuit:
         we gathered from .json data.
         We will eliminate all products that has None 
         values in our parameters """
-        #for product in self.product_downloaded[0]:
-            #print(product)
         pass
         
 
 def main():
-    data = ProductDownloadBiscuit()
+    data = ProductDownloadJam()
     data.check_connexion()
     data.get_product_list()
     data.clean_data_product()
