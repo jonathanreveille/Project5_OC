@@ -9,6 +9,7 @@ db = MySQLDatabase(NAME_DB, user=USER, password=PASSWORD,
                    host=HOST, port=PORT, charset=CHARSET)
 
 
+
 def main():
     pass
 

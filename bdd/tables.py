@@ -57,6 +57,7 @@ class Favorite(Base):
         indexes = (('from_product', 'to_replace_with'), True)
 
 
+
 def main():
     db.create_tables([
         Category, Store, Product, ProductStore, Brand, Favorite
