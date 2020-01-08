@@ -2,8 +2,14 @@
 # coding : utf-8
 
 from peewee import MySQLDatabase
-from config.settings import NAME_DB, USER, PASSWORD, HOST, PORT, CHARSET
 
+# Database connexion for application - MySQL
+NAME_DB = 'p5_db'
+USER = 'student'
+PASSWORD = 'student'
+HOST = '127.0.0.1'
+PORT = 3306
+CHARSET = 'utf8mb4'
 
 db = MySQLDatabase(NAME_DB, user=USER, password=PASSWORD,
                    host=HOST, port=PORT, charset=CHARSET)
@@ -11,7 +17,6 @@ db = MySQLDatabase(NAME_DB, user=USER, password=PASSWORD,
 
 def main():
     pass
-
 
 if __name__ == "__main__":
     pass

@@ -49,7 +49,7 @@ recommended by the official documentation.
 * `pipenv run python -m main`
 
 ### Licence:
-* Use of OpenFoodFacts datas[link](https://fr.openfoodfacts.org)
+* Use of data from OpenFoodFacts [link](https://fr.openfoodfacts.org)
 
 ### Acknowledgement:
 I would like to give special thanks to ***Thierry Chappuis***
