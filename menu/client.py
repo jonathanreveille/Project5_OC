@@ -5,19 +5,19 @@ import os
 import time
 from models.downloader import ProductDownloader
 from bdd.models import Product
-#from models.manager import ProductManager
-import os
+from exception.unvalid import UnvalidInput
 from collections import OrderedDict
 
 
-class ApplicationMenu:
+class Menu:
 
     def __init__(self, name):
         self
         self.name = name
+        self.favorited_list = {} #key will be the product to replace, AND , the value will be the product that replaces it
 
 
-    def show_menu(self):
+    def show_main_menu(self):
         """ This method is to show the menu and select a choice """
 
         os.system('clear')
@@ -29,15 +29,21 @@ class ApplicationMenu:
             0. Quit the app \n "
             )
 
-        selection = int(input("Please select one choice (number only): "))
+        try:
+            selection = int(input("Please select one choice (number only): "))
+
+        except ValueError:
+            raise UnvalidInput("You have to use a valid a number, no strings")
 
         return self.select_in_menu(selection)
+
 
 
     def select_in_menu(self, selection):
         """ This method is to select an option in the menu"""
         
         os.system('clear')
+
 
         if selection == 1: 
             print("The option you have chosen is the 1st,\
@@ -55,7 +61,8 @@ class ApplicationMenu:
         elif selection != int():
             print("WARNING : Please insert a number from list above only")
             time.sleep(3)
-            self.show_menu()
+            self.show_main_menu()
+
 
 
     def show_category(self):
@@ -73,9 +80,13 @@ class ApplicationMenu:
                    5 - Juices (Jus de fruit) \n \
                    0 - <<<Back To Menu>>> "
                    )
+        try:
+            key = int(input("Please, enter your choice (number only): "))
 
-        key = int(input("Please, enter your choice (number only): "))
-
+        except ValueError:
+            self.show_category()
+            raise UnvalidInput("You have to use a valid a number, no strings")
+            
         return self.selecting_a_category(key)
 
 
@@ -85,41 +96,62 @@ class ApplicationMenu:
 
         if key == 1:
             print("you have selected the category : Biscuits")
-            #Go to list of products from this category #TO DO 
+            input("Press ""b"" to return to menu: ")
+            self.show_main_menu()
+
         elif key == 2:
             print("You have selected the category : Pizza")
-            #Go to list of products from this category #TO DO 
+            input("Press ""b"" to return to menu: ")
+            self.show_main_menu()
+            #Go to list of products from this category #TO DO
+
         elif key == 3:
             print("You have selected the category : Pâte à tartiner salée")
+            input("Press ""b"" to return to menu: ")
+            self.show_main_menu()
             #Go to list of products from this category #TO DO 
+
         elif key == 4:
             print("You have selected the category : Confiture")
+            input("Press ""b"" to return to menu: ")
+            self.show_main_menu()
             #Go to list of products from this category #TO DO 
+
         elif key == 5:
             print("You have selected the category : Jus de fruit")
+            input("Press ""B"" to return to menu: ")
+            self.show_main_menu()
             #Go to list of products from this category #TO DO
+
         elif key == 0:
-            self.show_menu()
+            self.show_main_menu()
 
         elif key != int():
             print("Please insert a valid number from the list, try again")
+            time.sleep(3)
+            self.show_category()
+        
+        elif key == str():
+            print("Warning, use only numbers (integers) ")
             time.sleep(3)
             self.show_category()
 
 
     def look_at_favorites(self):
         """ This method is to get all our favorites """
-        print("Last updated favorite list : ")
+
+        print("Last updated favorite list : ", self.favorited_list)
+
+        input("Insert ""b"" if you want to go back to the main menu")
+
+        self.show_main_menu()
 
 
+
+    #ProductManager : Query : Select, search etc...
     def get_product_from_category(self, category):
         """ This method is to get products from a category """
         pass
-
-    #     for product in Product.select():
-    #         print(product.product_name)
-
-
 
     def get_healthy_product(self):
         pass
@@ -140,5 +172,5 @@ if __name__ == "__main__":
     os.system('clear')
 
     name = str(input("Welcome to Pur-Beurre, what's your name buddy ?  "))
-    a = ApplicationMenu(name)
-    a.show_menu()
+    a = Menu(name)
+    a.show_main_menu()

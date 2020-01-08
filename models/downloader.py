@@ -4,6 +4,7 @@ import peewee
 
 from bdd.Dbconnexion import db
 from bdd.models import Category, Product, Store, Brand, Favorite, ProductStore
+from settings.config import CATEGORY_LIST
 
 class ProductDownloader: #un  nom de class  c'est un nom  de  chose
     """ This class has the responsibility to download data from
@@ -19,12 +20,12 @@ class ProductDownloader: #un  nom de class  c'est un nom  de  chose
             "tag_contains_0": "contains",
             "tag_0": category,
             "sort_by": "unique_scans_n",
-            "page_size": 100, #need to implement cleaning method to go above 90 for Pizza
+            "page_size": 500,
             "json": 1
             }
-        
+
         self.category = category  #ça cest la catégorie qu'on requete. POur chaque catégorie, on va instancier un ProductDownloader
-        
+
 
     def check_connexion(self):
         """ This method is to download all data needed 
@@ -104,11 +105,43 @@ class ProductDownloader: #un  nom de class  c'est un nom  de  chose
 
             for store_name in product["stores"].split(","):
                 store, created = Store.get_or_create(store_name = store_name.strip().lower())
-                ProductStore.create(product=product_obj, store=store)
+                ProductStore.get_or_create(product=product_obj, store=store)
+                #ProductStore.create(product=product_obj, store=store)
            
 
-def main():
+    def create_object_by_category(self):
+        """ this module is to create all the different
+        categories that we will need for our application"""
 
+        self.check_connexion()
+        self.fetch_data_from_API()
+        self.get_product_data()
+        self.fill_product()
+        print("Well done ! You have created your objects, they are in your database now")
+
+
+def main():
+    b = ProductDownloader("biscuits")
+    b.create_object_by_category()
+
+    p = ProductDownloader("pizza")
+    p.create_object_by_category()
+
+    j = ProductDownloader("jus de fruit")
+    j.create_object_by_category()
+
+    v = ProductDownloader("pâte à tartiner salée")
+    v.create_object_by_category()
+
+    c = ProductDownloader("confiture")
+    c.create_object_by_category()
+
+
+if __name__ == "__main__":
+    main()
+
+
+#CONSEILS 
     # CONFIG = liste de catégory ["biscuit","pizza","pâte à tartiner"]
 
     # For category in liste_categories:
@@ -118,16 +151,23 @@ def main():
     #    les ajouter à une grande liste qu'on va faire nos checks up (is_valid())
     #    après on créer nos remplis nos produits dans nos tables 
 
+#AVANT EDITION
+    # b = ProductDownloader("biscuits")
+    # b.check_connexion()
+    # b.fetch_data_from_API()
+    # b.get_product_data()
+    # b.fill_product()
 
-    b = ProductDownloader("biscuits")
-    b.check_connexion()
-    b.fetch_data_from_API()
-    b.get_product_data()
-    b.fill_product()
 
+    # def create_object_by_category(self):
+    #     """ this module is to create all the different 
+    #     categories that we will need for our application"""
 
-if __name__ == "__main__":
-    main()
+    #     self.check_connexion()
+    #     self.fetch_data_from_API()
+    #     self.get_product_data()
+    #     self.fill_product()
+    #     print("You have created your objects")
 
 
 
