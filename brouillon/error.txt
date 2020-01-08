@@ -1,0 +1,53 @@
+error : 
+
+
+(librequest) macbook-pro-de-jonathan:librequest jonathanreveille$ python -m bdd.models
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/Users/jonathanreveille/dev/librequest/bdd/models.py", line 87, in <module>
+    main()
+  File "/Users/jonathanreveille/dev/librequest/bdd/models.py", line 81, in main
+    db.create_tables([Category, Store, Product, ProductStore, Brand, Favorite])
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 3244, in create_tables
+    model.create_table(**options)
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 6529, in create_table
+    cls._schema.create_all(safe, **options)
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 5680, in create_all
+    self.create_indexes(safe=safe)
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 5593, in create_indexes
+    for query in self._create_indexes(safe=safe):
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 5582, in _create_indexes
+    for index in self.model._meta.fields_to_index()]
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 5959, in fields_to_index
+    fields.append(self.combined[part])
+KeyError: 'f'
+
+# what is F ? 
+
+
+(librequest) macbook-pro-de-jonathan:librequest jonathanreveille$ python -m bdd.models
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/runpy.py", line 193, in _run_module_as_main
+    "__main__", mod_spec)
+  File "/Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/runpy.py", line 85, in _run_code
+    exec(code, run_globals)
+  File "/Users/jonathanreveille/dev/librequest/bdd/models.py", line 87, in <module>
+    main()
+  File "/Users/jonathanreveille/dev/librequest/bdd/models.py", line 81, in main
+    db.create_tables([Category, Store, Product, ProductStore, Brand, Favorite])
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 3244, in create_tables
+    model.create_table(**options)
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 6529, in create_table
+    cls._schema.create_all(safe, **options)
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 5680, in create_all
+    self.create_indexes(safe=safe)
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 5593, in create_indexes
+    for query in self._create_indexes(safe=safe):
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 5582, in _create_indexes
+    for index in self.model._meta.fields_to_index()]
+  File "/Users/jonathanreveille/.local/share/virtualenvs/librequest-Xll5VQNA/lib/python3.7/site-packages/peewee.py", line 5959, in fields_to_index
+    fields.append(self.combined[part])
+KeyError: 'p'
