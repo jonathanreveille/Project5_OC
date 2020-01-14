@@ -61,8 +61,6 @@ class Product(Base):
     class Meta:
         table_name = "product"
 
-# ProductStore = Product.stores.get_through_model()
-
 
 class ProductStore(Base):
     product = ForeignKeyField(Product, backref = "product_store_set")
@@ -84,8 +82,7 @@ class Favorite(Base):
 
 def create_tables():
     with db:
-        db.create_tables([Category, Store, Brand, Product, ProductStore, Favorite])
-
+        db.create_tables([Category, Store, Brand, Product, ProductStore, Favorite], safe=True)
 
 
 create_tables()
@@ -95,6 +92,8 @@ create_tables()
 # IT WORKS !!!!!!
 
         
+# ProductStore = Product.stores.get_through_model()
+
 
 # class ProductStore(Base):
 #     product = ForeignKeyField(Product, unique=True, null = False)
