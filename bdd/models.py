@@ -28,12 +28,11 @@ class Base(Model):
         database = db
 
 
-# my models : the product model specifies its fields (or columns) declaratively
-class Category(Base):
+class Category(Base): # my models : the product model specifies its fields (or columns) declaratively
     category_name = CharField(unique = True)
 
-    class Meta: #Meta information -->additional information than the columns from the table itself
-        table_name = "category"
+    class Meta: #Meta information -->additional information than the columns from the table itself. 
+        table_name = "category" # for example here, we add a table_name as an additional data about the table
 
 
 class Brand(Base):

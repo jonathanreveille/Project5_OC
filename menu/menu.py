@@ -30,7 +30,7 @@ class Menu:
 
             raise  ValueError("choice is not valid")  #raise an error here
 
-        return  self.entries[int(choice) -1]  #or select the entry from the user and minus 1 (since  1st position is 0 in our list of entries)
+        return  self.entries[int(choice) - 1]  #or select the entry from the user and minus 1 (since  1st position is 0 in our list of entries)
 
         
     def is_valid_choice(self, choice):

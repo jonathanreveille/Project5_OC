@@ -126,23 +126,6 @@ def main():
         cat = ProductDownloader(category)
         cat.create_object_by_category()
 
-    # # Type a category to download data from OpenFoodFact
-    # biscuit = ProductDownloader("biscuits")
-    # biscuit.create_object_by_category()
-
-    # pizza = ProductDownloader("pizza")
-    # pizza.create_object_by_category()
-
-    # juice = ProductDownloader("jus de fruit")
-    # juice.create_object_by_category()
-
-    # veggie = ProductDownloader("pâte à tartiner salée")
-    # veggie.create_object_by_category()
-
-    # gelo = ProductDownloader("confiture")
-    # gelo.create_object_by_category()
-
-
 if __name__ == "__main__":
     main()
 

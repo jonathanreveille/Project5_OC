@@ -628,3 +628,37 @@
 
 
 
+
+    # # Type a category to download data from OpenFoodFact
+    # biscuit = ProductDownloader("biscuits")
+    # biscuit.create_object_by_category()
+
+    # pizza = ProductDownloader("pizza")
+    # pizza.create_object_by_category()
+
+    # juice = ProductDownloader("jus de fruit")
+    # juice.create_object_by_category()
+
+    # veggie = ProductDownloader("pâte à tartiner salée")
+    # veggie.create_object_by_category()
+
+    # gelo = ProductDownloader("confiture")
+    # gelo.create_object_by_category()
+
+
+#CONSEILS 
+    # CONFIG = liste de catégory ["biscuit","pizza","pâte à tartiner"]
+
+    # For category in liste_categories:
+    #    self.check_data_API
+    #    obtenir les produits d'une catégorie,
+    #    obtenir les produits de la prochaine catégorie,
+    #    les ajouter à une grande liste qu'on va faire nos checks up (is_valid())
+    #    après on créer nos remplis nos produits dans nos tables 
+
+#AVANT EDITION
+    # b = ProductDownloader("biscuits")
+    # b.check_connexion()
+    # b.fetch_data_from_API()
+    # b.get_product_data()
+    # b.fill_product()
