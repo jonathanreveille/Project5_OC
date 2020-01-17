@@ -5,7 +5,8 @@ import peewee
 from settings.config import CATEGORY_LIST
 from bdd.models import Category, Product, Store, Brand, Favorite, ProductStore
 
-class ProductDownloader: #un  nom de class  c'est un nom  de  chose
+class ProductDownloader:
+    
     """ This class has the responsibility to download data from
     OpenFoodFact API """
 
@@ -105,7 +106,6 @@ class ProductDownloader: #un  nom de class  c'est un nom  de  chose
             for store_name in product["stores"].split(","):
                 store, created = Store.get_or_create(store_name = store_name.strip().lower())
                 ProductStore.get_or_create(product=product_obj, store=store)
-                #ProductStore.create(product=product_obj, store=store)
            
 
     def create_object_by_category(self):
@@ -128,24 +128,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-#CONSEILS 
-    # CONFIG = liste de catégory ["biscuit","pizza","pâte à tartiner"]
-
-    # For category in liste_categories:
-    #    self.check_data_API
-    #    obtenir les produits d'une catégorie,
-    #    obtenir les produits de la prochaine catégorie,
-    #    les ajouter à une grande liste qu'on va faire nos checks up (is_valid())
-    #    après on créer nos remplis nos produits dans nos tables 
-
-#AVANT EDITION
-    # b = ProductDownloader("biscuits")
-    # b.check_connexion()
-    # b.fetch_data_from_API()
-    # b.get_product_data()
-    # b.fill_product()
 
 
  

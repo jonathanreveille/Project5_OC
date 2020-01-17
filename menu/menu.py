@@ -9,6 +9,7 @@ class Menu:
     
     def __init__(self, entries):
         self.entries = entries
+        
 
     def __str__(self):
         """ This method is to create the options of the menu
