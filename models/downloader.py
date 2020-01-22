@@ -100,7 +100,7 @@ class ProductDownloader:
                 nutrition_grade_fr = product["nutrition_grade_fr"],
                 url=product["url"],
                 brand = brand,
-                category=category
+                category= category
             )
 
             for store_name in product["stores"].split(","):

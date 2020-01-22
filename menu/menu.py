@@ -18,6 +18,10 @@ class Menu:
         #   index  + 1 and  then  name  of  category for example
         #  for index  and  category in  menu entries
         #  return  with  "\n" and  join
+        
+        self.entries.append("HOME") #add at the end of menu option HOME
+        self.entries.append("QUIT") #add at the end of menu option QUIT
+
         lines = [f"{i+1} : {cat}" for i, cat in enumerate(self.entries)] # index +1 : category
 
         return "\n".join(lines)

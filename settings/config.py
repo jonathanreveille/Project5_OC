@@ -4,4 +4,4 @@
 
 """ This module is where all constants are stocked """
 
-CATEGORY_LIST = ["biscuits", "pizza", "jus de fruit", "pâte salée à tartiner", "confiture"]
+CATEGORY_LIST = ["biscuits", "pizza", "jus de fruit", "chips", "confiture"]
