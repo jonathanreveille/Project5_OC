@@ -15,13 +15,16 @@ class Client:
         self.running = False # acts like a switch  ON/OFF
         self.next  = self.menu0
         self.params = {}
+
         self.product_manager = ProductManager()
-        self.favorite_manager = FavoriteManager()
+        self.product_list = list()
 
         self.category_list = list()
-        self.product_list = list()
         self.substitute_list = list()
         self.store = list()
+
+        self.favorite_manager = FavoriteManager()
+        self.favorite_list = list()
 
 
     def start(self):
@@ -172,7 +175,7 @@ class Client:
         print("PLEASE FIND ADDITIONAL DATA ABOUT THE PRODUCT SELECTED :  ")
 
         for product in self.product_manager.get_data_from_substitute(self.params["substitute"]):
-            print(product.product_name, '>>> nutriscore : ', product.nutrition_grade_fr.upper(),"--",
+            print(product.product_name.capitalize(), '>>> nutriscore : ', product.nutrition_grade_fr.upper(),"--",
                 "more data :", product.url)
 
         menu = Menu(["WHERE TO BUY IT ?"])
@@ -231,12 +234,10 @@ class Client:
 
         self.favorite_manager.save_to_favorites(self.original, self.substitute)
 
-        print("You research has been saved to your favorites")
-
         menu = Menu(["See your list of favorites"])
 
         while True:
-
+            print("Your product has been saved to your favorites")
             print(menu)
             choice = input(">>  ")
             if menu.is_valid_choice(choice):
@@ -249,6 +250,14 @@ class Client:
                     self.next = self.back_home
 
             break
+
+
+    def menu7(self): #favorite list from user
+        """ this menu shows all the products that have been saved by the user """
+
+        for favorite in self.favorite_manager.show_favorites():
+            print(favorite)...
+            pass
 
 
     def back_home(self):

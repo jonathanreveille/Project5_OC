@@ -96,7 +96,21 @@ class ProductManager:
         .where(Product.product_name == self.query)
         .order_by(Product.product_name).limit(10))
 
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # def get_healthy_products2(self, category):
     #     """ this method is to get all healthy product from a category
     #     from the database """
