@@ -1,7 +1,8 @@
 #! /usr/bin/env python3
 # coding : utf-8
 
-import os 
+import os
+import time
 
 from .menu import Menu
 from bdd.productmanager import ProductManager
@@ -44,10 +45,10 @@ class Client:
         os.system('clear')
 
         # print("Dans self.params: ", self.params)
-        print("WHAT DO YOU WISH TO DO TODAY ?")
+        print("WELCOME TO PUR-BEURRE, WHAT DO YOU WISH TO DO TODAY ?")
         
         menu = Menu(["Find an healthier product ?",
-                    "See your list of favorites"])
+                    "Go to favorites"])
 
         while True:
             print(menu)
@@ -57,6 +58,9 @@ class Client:
                 self.next = self.menu1
                 entry = menu[choice]
                 self.params["action"] = menu[choice]
+
+                if entry == "Go to favorites":
+                    self.next == self.menu7
 
                 if entry == "QUIT":
                     self.next = self.quit_app
@@ -214,12 +218,14 @@ class Client:
             choice = input(">> ")
 
             if menu.is_valid_choice(choice):
+                entry = menu[choice]
+                self.params["Add to favorite"] = entry
                 self.next = self.menu6
 
-                if choice == "QUIT":
+                if entry == "QUIT":
                     self.next = self.quit_app
 
-                elif choice == "HOME":
+                elif entry == "HOME":
                     self.next = self.back_home
 
             break
@@ -237,11 +243,12 @@ class Client:
         menu = Menu(["See your list of favorites"])
 
         while True:
+
             print("Your product has been saved to your favorites")
             print(menu)
             choice = input(">>  ")
             if menu.is_valid_choice(choice):
-                self.next = self.back_home
+                self.next = self.menu7
 
                 if choice == "QUIT":
                     self.next = self.quit_app
@@ -252,12 +259,42 @@ class Client:
             break
 
 
-    def menu7(self): #favorite list from user
+    def menu7(self): # I dont want these brakets... need to find a solution
         """ this menu shows all the products that have been saved by the user """
 
         for favorite in self.favorite_manager.show_favorites():
-            print(favorite)...
-            pass
+
+            self.favorite_list.append(
+                (favorite.substituted_product.product_name,
+                favorite.substitute_products.brand.brand_name,
+                favorite.substitute_products.nutrition_grade_fr,
+                favorite.substitute_products.url))
+           
+            # print(
+            #     favorite.substituted_product.product_name,
+            #     ">> replaced by :", favorite.substitute_products.product_name, 
+            #     "-- nutriscore :", favorite.substitute_products.nutrition_grade_fr.upper(),
+            #     "-- brand :", favorite.substitute_products.brand.brand_name,
+            #     " -- find more data : ", favorite.substitute_products.url)
+
+        menu = Menu(self.favorite_list)
+
+
+        while True:
+            print("Here is your favorite list of products")
+            print(menu)
+            choice = input(">>  ")
+            if menu.is_valid_choice(choice):
+                self.next = self.back_home
+                
+                if choice == "QUIT":
+                    self.next = self.quit_app
+
+                elif choice == "HOME":
+                    self.next = self.back_home
+
+            break
+
 
 
     def back_home(self):
@@ -269,14 +306,17 @@ class Client:
         back_home = input(">> Are you sure you want to go back HOME ? Y / N : ")
 
         if back_home == "Y":
+            self.running = True
             self.next = self.menu0
             self.params = {}
             self.category_list = []
             self.product_list= []
             self.substitute_list = []
+            self.favorite_list = []
 
         else:
             pass
+
 
 
     def quit_app(self): 
@@ -289,12 +329,13 @@ class Client:
         
         if quit_yes_or_no == "Y":
             self.running = False
-            print("Good Bye")
+            print("Good Bye, see you another time ")
+            time.sleep(3)
+            
 
         elif quit_yes_or_no  ==  "N":
             self.running = True 
-            self.next = self.back_home #instead of menu0
-
+            self.next = self.back_home
 
 
 client = Client()

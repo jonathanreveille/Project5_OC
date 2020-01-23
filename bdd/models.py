@@ -10,11 +10,11 @@ ForeignKeyField,
 CompositeKey,
 PrimaryKeyField)
 
-import logging
+# import logging
 
-logger = logging.getLogger('peewee') 
-logger.addHandler(logging.StreamHandler()) 
-logger.setLevel(logging.DEBUG)
+# logger = logging.getLogger('peewee') 
+# logger.addHandler(logging.StreamHandler()) 
+# logger.setLevel(logging.DEBUG)
 
 
 # Class base that takes a Model in argument

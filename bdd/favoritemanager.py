@@ -2,6 +2,7 @@
 # coding : utf-8
 
 import peewee
+from peewee import JOIN
 
 from .models import Favorite, Product
 
@@ -38,13 +39,161 @@ class FavoriteManager():
                 sub_obj = Product.get(Product.product_name == self.substitute)
                 Favorite.get_or_create(substituted_product = product_obj, substitute_products = sub_obj)
 
-   
+
     def show_favorites(self):
-        """ this method will retrieve data from Favorite table
-        into the name of products for the user's favorite list"""
+        """ this method shows the foreign keys of products that
+        has been saved into the user's favorite table """
 
+        return list(Favorite.select())
+
+
+    def show_favorites2(self): #WORKS WELL
+        """ this method shows the foreign keys of products that
+        has been saved into the user's favorite table """
+
+        for favorite in Favorite.select():
+            print(
+                favorite.substituted_product.product_name, ">> replaced by :",
+                favorite.substitute_products.product_name, "-- brand :", favorite.substitute_products.brand.brand_name,
+                " -- find more data : ", favorite.substitute_products.url)
+
+
+    def delete_from_favorite(self, to_delete):
+
+        self.line_to_delete = to_delete
+
+        (Favorite.delete()
+        .where((Favorite.substitute_product)
+            & (Favorite.substituted_products)).execute())
+
+            #NOT TOO SURE ABOUT THAT ^^^^
+
+
+
+
+favorite_manager = FavoriteManager()
+favorite_manager.show_favorites()
+
+   
+    # def show_favorites2(self):
+    #     """ this method will retrieve data from Favorite table
+    #     into the name of products for the user's favorite list"""
+
+    #     Substituted_product = Product.alias()
+    #     Substitute_products = Product.alias()
+       
+    #     query = (
+    #         Favorite.select(Favorite, Substituted_product, Substitute_products)
+    #         .join(Substitute_products, on=(Favorite.substituted_product == Substituted_product))
+    #         .switch(Favorite)
+    #         .join(Substituted_product, on=(Favorite.substitute_products == Substitute_products)))
+
+    #     for favorite in query:
+    #         print(favorite.substituted_product.product_name, ">>", favorite.substitute_products.product_name)
+
+
+        # for favorite in (Favorite.select()
+        #     .join(Product)
+        #     .where(favorite.substitute_products == Product.product_name)
+        #     &(favorite.substituted_product == Product.product_name)):
         
+        #     print(favorite.substitute_products, '>>>', favorite.substituted_product)
 
+
+        # )
+        # for favorite in (Favorite.select()
+        # .join(Product)
+        # .where(
+        #     (favorite.substituted_product == Product.product_name)
+        #     &(favorite.substituted_products ==  Product.product_name))
+        #     ):
+            
+        #     print(favorite.substituted_product == Product.product_name, "replaced by >>", favorite.substitute_products == Product.product_name)
+        
+#         query = (Favorite
+#          .select(Favorite, Product)
+#          .join(Product, JOIN.LEFT_OUTER)  # Joins product -> favorite
+#          .join(Favorite, JOIN.LEFT_OUTER)  # Joins favorite -> product
+#          .group_by(Favorite.substituted_product, Favorite.substitute_products))
+
+#         for favorite in query:
+#             print(favorite.substituted_product,favorite.substitute_products)
+
+# # #TEST 1
+#         Parent = Category.alias()
+        
+#         query = (Category
+#          .select()
+#          .join(Parent, on=(Category.parent == Parent.id))
+#          .where(Parent.name == 'Electronics'))
+
+        # prod = Product.alias()
+        
+        # query = (Favorite
+        #  .select()
+        #  .join(Product, on=(Favorite.substituted_product == Product.product_name)
+        #  .join(Product, on=(Favorite.substitute_products == Product.product_name)))
+        #  .where(
+        #     (prod.product_name == Favorite.substitute_products)
+        #     & (prod.product_name == Favorite.substituted_product)))
+        
+        # for product in query:
+        #     print(product)
+
+        # query = (Favorite
+        #         .select()
+        #         .join(Product)
+        #         .join(Favorite)
+        #         .where(
+        #             (Favorite.substituted_product == Product.product_name)
+        #             &(Favorite.substitute_products == Product.product_name)
+        #         ))
+        
+        # for favorite in query:
+        #     print(favorite.substituted_product," >>", favorite.substitute_products)
+                
+   
+# #TEST 2
+#         query = (Student
+#                 .select()
+#                 .join(StudentCourse)
+#                 .join(Course)
+#                 .where(Course.name == 'math'))
+
+#         for student in query:
+#             print(student.name)
+
+#WHAT WE ARE TRYING
+        # for favorite in (Favorite.select()
+        # .join(Product, on=(favorite.substituted_product == Product.product_name)
+        # .join(Favorite, on=(Product.product_name == favorite.substitute_products)))):
+        #     #print(favorite.substituted_product, "replaced by >>", favorite.substitute_products)
+            
+
+#GIVES US BACK normal lines without the name of the product
+
+        #for favorite in (Favorite.select()):
+            #print(favorite.substituted_product, "replaced by >>", favorite.substitute_products)
+
+
+
+
+
+
+
+        # .where(favorite.substituted_product == Product.product_name)
+        # &(favorite.substitue_products == Product.product_name)):
+            
+        # for favorite in (
+        #     Favorite.select()
+        #     .join(Product)
+        #     .where(
+        #         (favorite.substituted_product == Product.product_name)
+        #     &(favorite.substitute_products == Product.product_name))):
+
+        #     print(favorite.substituted_product, "replaced by >>", favorite.substitute_products)
+              #>>>>ValueError: More than one foreign key between <Model: Favorite> and <Model: Product>. Please specify which you are joining on.
+       
 
         # for favorite in (
         #     Favorite.select()
@@ -98,22 +247,6 @@ class FavoriteManager():
 
         #     print(favorite.substituted_product, ">> replaced by >>", favorite.substitute_products)
 
-    
-    def delete_from_favorite(self, to_delete):
-
-        self.line_to_delete = to_delete
-
-        (Favorite.delete()
-        .where((Favorite.substitute_product)
-            & (Favorite.substituted_products)).execute())
-
-            #NOT TOO SURE ABOUT THAT ^^^^
-
-
-
-
-favorite_manager = FavoriteManager()
-favorite_manager.show_favorites()
 
 
 

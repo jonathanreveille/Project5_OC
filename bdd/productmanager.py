@@ -53,8 +53,8 @@ class ProductManager:
                 .select(Product.product_name, Product.category, Product.nutrition_grade_fr)
                 .join(Category)
                 .where(
-                    (Category.category_name == self.query) \
-                    & (Product.nutrition_grade_fr >= "c")\
+                    (Category.category_name == self.query)
+                    & (Product.nutrition_grade_fr >= "c")
                 )
                 .order_by(fn.Rand()).limit(10)
             )
