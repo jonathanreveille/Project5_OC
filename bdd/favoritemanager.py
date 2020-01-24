@@ -48,17 +48,6 @@ class FavoriteManager():
         return list(Favorite.select())
 
 
-    # def show_favorites2(self): #WORKS WELL
-        # """ this method shows the foreign keys of products that
-        # has been saved into the user's favorite table """
-
-        # for favorite in Favorite.select():
-        #     print(
-        #         favorite.substituted_product.product_name, ">> replaced by :",
-        #         favorite.substitute_products.product_name, "-- brand :", favorite.substitute_products.brand.brand_name,
-        #         " -- find more data : ", favorite.substitute_products.url)
-
-
     def delete_from_favorite(self, to_delete):
 
         """ this method allows the user to delete 
@@ -72,3 +61,13 @@ class FavoriteManager():
 
 # favorite_manager = FavoriteManager()
 # favorite_manager.show_favorites()
+
+    # def show_favorites2(self): #WORKS WELL
+        # """ this method shows the foreign keys of products that
+        # has been saved into the user's favorite table """
+
+        # for favorite in Favorite.select():
+        #     print(
+        #         favorite.substituted_product.product_name, ">> replaced by :",
+        #         favorite.substitute_products.product_name, "-- brand :", favorite.substitute_products.brand.brand_name,
+        #         " -- find more data : ", favorite.substitute_products.url)

@@ -40,7 +40,7 @@ class ProductDownloader:
         if connexion == False:
             print("<<Not connected to API>>")
         else:
-            print("<<Connected to API>>")
+            print("<<Connected to API, loading...>>")
 
 
     def fetch_data_from_API(self):
@@ -65,7 +65,7 @@ class ProductDownloader:
 
         for field in fields:
             if field not in product or not product[field]:
-                print("Debugg1", f"{field}", " is missing info or keys for the product:", product.get("product_name"))
+                #print("Debugg1", f"{field}", " is missing info or keys for the product:", product.get("product_name"))
                 return False
 
         return True
@@ -116,7 +116,7 @@ class ProductDownloader:
         self.fetch_data_from_API()
         self.get_product_data()
         self.fill_product()
-        print("Well done ! You have created your objects, they are in your database now")
+        print("Thanks for waiting, well done ! You have created your objects, they are in your database now")
 
 
 def main():

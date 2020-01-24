@@ -41,8 +41,6 @@ class Client:
         """ This menu will ask the user what he wishes to 
         do on the application """
 
-        os.system('clear')
-
         # print("Dans self.params: ", self.params)
         print("WELCOME TO PUR-BEURRE, WHAT DO YOU WISH TO DO TODAY ?")
         
@@ -72,9 +70,7 @@ class Client:
 
     def menu1(self): #CATEGORY MENU
         """ this method shows all the present categories
-         to the user in this menu"""
-
-        # os.system('clear')
+         to the user in this menu """
 
         for category in self.product_manager.get_all_category():
             self.category_list.append(category.category_name.capitalize())
@@ -82,7 +78,6 @@ class Client:
         menu = Menu(self.category_list)
 
         while True:
-            # os.system('clear')
 
             print("CHOOSE A CATEGORY : ")
             print(menu)
@@ -106,9 +101,7 @@ class Client:
         """ this method shows the menu of products
         for the user """
 
-        # os.system('clear')
-
-        print("Dans self.params", self.params)
+        #print("Dans self.params", self.params)
 
         for product in self.product_manager.get_unhealthy_products(self.params["category"]):
             self.product_list.append(product.product_name)
@@ -116,7 +109,7 @@ class Client:
         menu = Menu(self.product_list)
 
         while True:
-            # os.system('clear')
+
             print("CHOOSE A PRODUCT THAT YOU MIGHT KNOW :")
             print(menu)
             choice = input(">>>  ")
@@ -139,9 +132,7 @@ class Client:
         """ THis method is to show the menu of substitutes products
         for the user """
 
-        os.system('clear')
-
-        print("Dans self.params", self.params)
+        #print("Dans self.params", self.params)
 
         for product in self.product_manager.get_healthy_products(self.params["category"]):
             self.substitute_list.append(product.product_name)
@@ -149,7 +140,7 @@ class Client:
         menu = Menu(self.substitute_list)
 
         while True:
-            os.system('clear')
+
             print("CHOOSE A PRODUCT THAT WILL REPLACE IT :")
             print(menu)
             choice =  input(">>>  ")
@@ -171,12 +162,10 @@ class Client:
     def menu4(self): # more info about product ?
         """ this method shows the user addition data 
         about the substituted product """
-        
-        os.system('clear')
-
+    
         #print("Dans self.params", self.params)
 
-        print("PLEASE FIND ADDITIONAL DATA ABOUT THE PRODUCT SELECTED :  ")
+        print("PLEASE FIND ADDITIONAL DATA ABOUT THE PRODUCT SELECTED (sometimes, product from different brands have the same product name) :  ")
 
         for product in self.product_manager.get_data_from_substitute(self.params["substitute"]):
             print(product.product_name.capitalize(), '>>> nutriscore : ', product.nutrition_grade_fr.upper(),"--",
@@ -206,12 +195,13 @@ class Client:
     def menu5(self):
         """ This method shows the store where we can 
         buy the product """
-    
-        os.system('clear')
+
+        stores = []
 
         for store in self.product_manager.get_store_name_for_product(self.params["substitute"]):
+            stores.append(store.store_name)
 
-            print("Here is the store where you can get it : ", store.store_name.capitalize())
+            print(f">>> Store: {store.store_name.capitalize()}", end= "\n")
 
         menu = Menu(["ADD TO FAVORITES ?"])
 
@@ -221,7 +211,7 @@ class Client:
 
             if menu.is_valid_choice(choice):
                 entry = menu[choice]
-                self.params["Add to favorite"] = entry
+                #self.params["favorite"] = entry
                 self.next = self.menu6
 
                 if entry == "QUIT":
@@ -242,7 +232,7 @@ class Client:
 
         self.favorite_manager.save_to_favorites(self.original, self.substitute)
 
-        menu = Menu(["See your list of favorites"])
+        menu = Menu(["GO TO FAVORITES"])
 
         while True:
 
@@ -264,7 +254,7 @@ class Client:
             break
 
 
-    def menu7(self): # I dont want these brakets... need to find a solution
+    def menu7(self):
         """ this menu shows all the products that have been saved by the user """
 
         menu = Menu([])
@@ -273,17 +263,17 @@ class Client:
 
             for favorite in self.favorite_manager.show_favorites():
 
-                print(f" -  {favorite.substituted_product.product_name}, ({favorite.substitute_products.nutrition_grade_fr.upper()})")
+                print(f" -  {favorite.substitute_products.product_name}, ({favorite.substitute_products.nutrition_grade_fr.upper()})")
                 print(f"    Brand : {favorite.substitute_products.brand.brand_name}")
-                print(f"    URL : {favorite.substitute_products.url}")
-                print("    Stores : ", end="")
+                print(f"    URL : {favorite.substitute_products.url}", end="\n")
+                #print(f"    Stores : ", end="\n")
                 
-                stores = []
+                # stores = []
 
-                for store in self.product_manager.get_store_name_for_product(favorite.substituted_product.product_name):
-                    stores.append(store.store_name)
+                # for store in self.product_manager.get_store_name_for_product(favorite.substituted_product.product_name):
+                #     stores.append(store.store_name.upper())
 
-                print(", ".join(stores))
+                # print(", ".join(stores))
 
             print(menu)
             choice = input(">>  ")
@@ -298,6 +288,52 @@ class Client:
                     self.next = self.back_home
 
             break
+
+
+    def back_home(self):
+        """ this method is to get back at the main menu
+        deleting all other past search from user's session"""
+
+        #print("Dans self.params", self.params)
+
+        self.running = True
+        self.next = self.menu0
+        self.params = {}
+        self.category_list = []
+        self.product_list= []
+        self.substitute_list = []
+        self.favorite_list = []
+
+
+    def quit_app(self): 
+        """ This method manages the option quit 1
+        from the menu for the client's interface """
+
+        #print("Dans self.params", self.params)
+
+        quit_yes_or_no = input(">>> Do you really want to QUIT ? Y / N :  ")
+        
+        if quit_yes_or_no == "Y":
+            self.running = False
+            print("Good Bye, see you another time ")
+
+        elif quit_yes_or_no  ==  "N":
+            self.running = True 
+            self.next = self.back_home
+
+
+client = Client()
+client.start()
+
+
+
+#menu store
+            # print(f"Store : {store.store_name.capitalize()}", end="\n")
+
+     #OG >>>   # for store in self.product_manager.get_store_name_for_product(self.params["substitute"]):
+
+        #>>>  print("Here is the store where you can get it : ", store.store_name.capitalize())
+
 
         #     (favorite.substituted_product.product_name,
             # favorite.substitute_products.brand.brand_name,
@@ -317,68 +353,4 @@ class Client:
             #     "-- nutriscore :", favorite.substitute_products.nutrition_grade_fr.upper(),
             #     "-- brand :", favorite.substitute_products.brand.brand_name,
             #     " -- find more data : ", favorite.substitute_products.url)
-
-
-
-
-        while True:
-            print("Here is your favorite list of products")
-            print(menu)
-            choice = input(">>  ")
-            if menu.is_valid_choice(choice):
-                self.next = self.back_home
-                
-                if choice == "QUIT":
-                    self.next = self.quit_app
-
-                elif choice == "HOME":
-                    self.next = self.back_home
-
-            break
-
-
-
-    def back_home(self):
-        """ this method is to get back at the main menu
-        deleting all other past search from user's session"""
-
-        print("Dans self.params", self.params)
-
-        back_home = input(">> Are you sure you want to go back HOME ? Y / N : ")
-
-        if back_home == "Y":
-            self.running = True
-            self.next = self.menu0
-            self.params = {}
-            self.category_list = []
-            self.product_list= []
-            self.substitute_list = []
-            self.favorite_list = []
-
-        else:
-            pass
-
-
-
-    def quit_app(self): 
-        """ This method manages the option quit 1
-        from the menu for the client's interface """
-
-        print("Dans self.params", self.params)
-
-        quit_yes_or_no = input(">>> Do you really want to QUIT ? Y / N :  ")
-        
-        if quit_yes_or_no == "Y":
-            self.running = False
-            print("Good Bye, see you another time ")
-            time.sleep(3)
-            
-
-        elif quit_yes_or_no  ==  "N":
-            self.running = True 
-            self.next = self.back_home
-
-
-client = Client()
-client.start()
 
