@@ -196,12 +196,17 @@ class Client:
         """ This method shows the store where we can 
         buy the product """
 
-        stores = []
+        self.stores = []
+
+        # for store in self.product_manager.get_store_name_for_product(self.params["substitute"]):
+        #     stores.append(store.store_name)
+
+        #     print(f">>> Store: {store.store_name.capitalize()}", end= "\n")
 
         for store in self.product_manager.get_store_name_for_product(self.params["substitute"]):
-            stores.append(store.store_name)
-
-            print(f">>> Store: {store.store_name.capitalize()}", end= "\n")
+            self.stores.append(store)
+            print("Store : ", store.store_name.capitalize())
+            #print("Store : ", store.store_name.capitalize())
 
         menu = Menu(["ADD TO FAVORITES ?"])
 
@@ -265,15 +270,15 @@ class Client:
 
                 print(f" -  {favorite.substitute_products.product_name}, ({favorite.substitute_products.nutrition_grade_fr.upper()})")
                 print(f"    Brand : {favorite.substitute_products.brand.brand_name}")
-                print(f"    URL : {favorite.substitute_products.url}", end="\n")
-                #print(f"    Stores : ", end="\n")
+                print(f"    URL : {favorite.substitute_products.url}")
+                print(f"    Stores : ", end="")
                 
-                # stores = []
+                stores = []
 
-                # for store in self.product_manager.get_store_name_for_product(favorite.substituted_product.product_name):
-                #     stores.append(store.store_name.upper())
+                for store in self.product_manager.get_store_name_for_product(favorite.substitute_products.product_name):
+                    stores.append(store.store_name.upper())
 
-                # print(", ".join(stores))
+                print(", ".join(stores))
 
             print(menu)
             choice = input(">>  ")

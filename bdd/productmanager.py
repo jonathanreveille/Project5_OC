@@ -78,7 +78,7 @@ class ProductManager:
     def get_store_name_for_product(self, product):
         """ get name of stores where we can buy a product """
 
-        self.query == product
+        self.query = product
 
         return list(Store.select()
         .join(ProductStore)
