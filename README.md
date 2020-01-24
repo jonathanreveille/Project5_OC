@@ -4,18 +4,18 @@
 
 ## :snake: Python App Development - Project 5 - Purbeurre !
 
-Here is the [link](https://github.com/jonathanreveille/OC_projet5.git) to the project
+Here is the [link](https://github.com/jonathanreveille/Project5_OC.git) to the project
 
 ### The project
 For this project, we had to create an application that allows the user seek for food alternatives. 
 Why food alternatives?
+
 Because it seems that product nutrition tables aren't easy to 
 de-code in-store, this is why we generated this application in order 
 to ease your daily life when you are seeking for healthier food 
 at your own neighborehood store.
 
-So far this application workds under the **terminal mode**. We will 
-provide graphics into the next versions of this application.
+So far this application works under the **terminal mode**.
 
 ### Description of the project (application) :
 The program will ask the user to choose between two options : 
@@ -46,7 +46,8 @@ recommended by the official documentation.
 
 ### Launch the app
  
-* `pipenv run python -m main`
+* step1 : `pipenv run python -m models.downloader`
+* step2 : `pipenv run python -m menu.client`
 
 ### Licence:
 * Use of data from OpenFoodFacts [link](https://fr.openfoodfacts.org)
