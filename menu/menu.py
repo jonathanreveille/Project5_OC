@@ -3,15 +3,17 @@
 
 
 class MenuHome:
-    """this class is to create a list of menu for the client interface."""
+    """ this class is to create a list of menu for the
+    client interface"""
 
     def __init__(self, entries):
         self.entries = entries
 
     def __str__(self):
-        """This method is to create the options of the menu and it allows to
-        show in string the menu the way we want."""
-        #   index  + 1 and  then  name  of  category for example
+        """ This method is to create the options of the menu
+        and it allows to show in string the menu the way
+        we want """
+        #  index  + 1 and  then  name  of  category for example
         #  for index  and  category in  menu entries
         #  return  with  "\n" and  join
 
@@ -23,8 +25,8 @@ class MenuHome:
         return "\n".join(lines)
 
     def __getitem__(self, choice):
-        """this method  is  to  select  an option from the menu, it will check
-        if the menu option exists."""
+        """ this method  is  to  select  an option from the
+        menu, it will check  if the menu option exists """
 
         # if choice is not in the range of self.entries possible
         if not (0 < int(choice) <= len(self.entries)):
@@ -35,8 +37,8 @@ class MenuHome:
         return self.entries[int(choice) - 1]
 
     def is_valid_choice(self, choice):
-        """this method is  to  verify if the choosen option is available in the
-        menu."""
+        """  this method is  to  verify if the choosen
+        option is available in the menu """
 
         if not choice.isdigit():  # if choice is not  a number
             return False
@@ -48,14 +50,16 @@ class MenuHome:
 
 
 class Menu:
-    """this class is to create a list of menu for the client interface."""
+    """ this class is to create a list of menu for the
+    client interface"""
 
     def __init__(self, entries):
         self.entries = entries
 
     def __str__(self):
-        """This method is to create the options of the menu and it allows to
-        show in string the menu the way we want."""
+        """ This method is to create the options of the menu
+        and it allows to show in string the menu the way
+        we want """
         #   index  + 1 and  then  name  of  category for example
         #  for index  and  category in  menu entries
         #  return  with  "\n" and  join
@@ -69,8 +73,8 @@ class Menu:
         return "\n".join(lines)
 
     def __getitem__(self, choice):
-        """this method  is  to  select  an option from the menu, it will check
-        if the menu option exists."""
+        """ this method  is  to  select  an option from the
+        menu, it will check  if the menu option exists """
 
         # if choice is not in the range of self.entries possible
         if not (0 < int(choice) <= len(self.entries)):
@@ -80,9 +84,9 @@ class Menu:
         return self.entries[int(choice) - 1]
 
     def is_valid_choice(self, choice):
-        """this method is  to  verify if the  choosen option is available in
-        the menu."""
-
+        """  this method is  to  verify if the  choosen
+        option is available in the menu """
+        
         if not choice.isdigit():  # if choice is not a number
             return False
 
