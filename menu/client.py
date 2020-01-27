@@ -4,7 +4,7 @@
 import os
 import time
 
-from .menu import Menu
+from .menu import MenuHome, Menu
 from bdd.productmanager import ProductManager
 from bdd.favoritemanager import FavoriteManager
 
@@ -44,7 +44,7 @@ class Client:
         # print("Dans self.params: ", self.params)
         print("WELCOME TO PUR-BEURRE, WHAT DO YOU WISH TO DO TODAY ?")
         
-        menu = Menu(["Find an healthier product ?",
+        menu = MenuHome(["Find an healthier product ?",
                     "Go to favorites"])
 
         while True:

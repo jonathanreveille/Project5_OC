@@ -46,8 +46,8 @@ recommended by the official documentation.
 
 ### Launch the app
  
-* step1 : `pipenv run python -m models.downloader`
-* step2 : `pipenv run python -m menu.client`
+* step1 : `pipenv run python -m models.downloader` (loads data to your db)
+* step2 : `pipenv run python -m menu.client` (launches the app)
 
 ### Licence:
 * Use of data from OpenFoodFacts [link](https://fr.openfoodfacts.org)
