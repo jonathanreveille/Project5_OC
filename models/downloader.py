@@ -3,10 +3,11 @@ import requests
 import peewee
 
 from settings.config import CATEGORY_LIST
-from bdd.models import Category, Product, Store, Brand, Favorite, ProductStore
+from bdd.models import Category, Product, Store, Brand, ProductStore
+
 
 class ProductDownloader:
-    
+
     """ This class has the responsibility to download data from
     OpenFoodFact API """
 
@@ -24,36 +25,34 @@ class ProductDownloader:
             "json": 1
             }
 
-        self.category = category  #ça cest la catégorie qu'on requete. POur chaque catégorie, on va instancier un ProductDownloader
-
+        self.category = category
 
     def check_connexion(self):
         """ This method is to download all data needed 
-        from the URL, 
-        output = if <Response 200> params 
-        and url == everything is well set """
+        from the URL,
+        output = if <Response 200> params
+        and url == everything is well set"""
         
         connexion = True
-        #self.response = statut.code()
-        self.response = requests.get(self.url, params=self.params) # si pas de réseau = on arrivesur une exception. # Si le serveur ne répond 
+        # self.response = statut.code()
+        self.response = requests.get(self.url, params=self.params)
+        # si pas de réseau = on arrive sur une exception.
 
-        if connexion == False:
+        if not connexion:
             print("<<Not connected to API>>")
         else:
             print("<<Connected to API, loading...>>")
 
-
     def fetch_data_from_API(self):
-        """ This method is to transform what we received 
+        """ This method is to transform what we received
         from the API into .json format.
         We get in return a dictionnary field with data """
 
         self.data_product = self.response.json()
-        #type(self.data_product)) # this a dict
-
-        return self.data_product #becomes a list if we add : ...["products"] to self.data_product. 
-                                #We rather keep it as a dictionnary
-
+        # type(self.data_product)) -> this a dict
+        return self.data_product
+        # becomes a list if we add ["products"]
+        # to self.data_product.
 
     def is_valid_data(self, product):
         """ This method to validate the data that is present and complete
@@ -65,11 +64,9 @@ class ProductDownloader:
 
         for field in fields:
             if field not in product or not product[field]:
-                #print("Debugg1", f"{field}", " is missing info or keys for the product:", product.get("product_name"))
+                # print("Debugg1", f"{field}", " is missing info or keys for the product:", product.get("product_name"))
                 return False
-
         return True
-
 
     def get_product_data(self): 
         """  This method is to add to at our product [list]
@@ -85,9 +82,8 @@ class ProductDownloader:
 
         return self.product_list #on a une liste de dictionnaire avec toutes les informations
 
-
     def fill_product(self):
-        ''' this method is filter all our stores '''
+        """ this method is filter all our stores """
 
         category, created = Category.get_or_create(category_name=self.category)
 
@@ -107,10 +103,9 @@ class ProductDownloader:
                 store, created = Store.get_or_create(store_name = store_name.strip().lower())
                 ProductStore.get_or_create(product=product_obj, store=store)
            
-
     def create_object_by_category(self):
         """ this module is to create all the different
-        categories that we will need for our application"""
+        categories that we will need for our application """
 
         self.check_connexion()
         self.fetch_data_from_API()
@@ -128,6 +123,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
- 
