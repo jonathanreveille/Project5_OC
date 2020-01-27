@@ -18,5 +18,6 @@ db = MySQLDatabase(NAME_DB, user=USER, password=PASSWORD,
 def main():
     pass
 
+
 if __name__ == "__main__":
     pass
