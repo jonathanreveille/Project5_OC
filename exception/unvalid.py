@@ -7,11 +7,3 @@
 class UnvalidInput(Exception):
     """A class when the user inserts an unvalid input."""
     pass
-
-
-def main():
-    pass
-
-
-if __name__ == "__main__":
-    main()
