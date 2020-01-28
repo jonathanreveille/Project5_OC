@@ -101,9 +101,6 @@ into the existing list CATEGORY_LIST (e.g : "pains", or "bread")
 models.downloader.py handles it already.
 
 
-
-
-
 ### Description of the project (application) :
 The user will only need to use a number (integers) to select
 the action he wishes the do with the application.
@@ -127,15 +124,20 @@ In order to see some favorites, the user needs to save at least
 1 search. Else, the favorite menu will be empty, but still accessible
 when launching the application the first time.
 
+Here are a couple of screenshots of the application, enjoy : 
 
-
-
-
+![App Screenshot](image/homemenu.png)
+![App Screenshot](image/productmenu.png)
+![App Screenshot](image/submenu.png)
+![App Screenshot](image/datamenu.png)
+![App Screenshot](image/addfavmenu.png)
+![App Screenshot](image/favmenu.png)
 
 
 ### Licence:
 * Use of data from OpenFoodFacts [link](https://fr.openfoodfacts.org)
 
+
 ### Acknowledgement:
-I would like to give special thanks to ***Thierry Chappuis***
+I would like to give special thanks to ***Thierry Chappuis***, my mentor,
 for guiding me throughout this project.
