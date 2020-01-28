@@ -3,13 +3,8 @@
 
 from peewee import MySQLDatabase
 
-# Database connexion for application - MySQL
-NAME_DB = 'p5_db'
-USER = 'student'
-PASSWORD = 'student'
-HOST = '127.0.0.1'
-PORT = 3306
-CHARSET = 'utf8mb4'
+from settings.config import NAME_DB, USER, PASSWORD, HOST, PORT, CHARSET
+
 
 db = MySQLDatabase(NAME_DB, user=USER, password=PASSWORD,
                    host=HOST, port=PORT, charset=CHARSET)
