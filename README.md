@@ -127,10 +127,7 @@ when launching the application the first time.
 Here are a couple of screenshots of the application, enjoy : 
 
 ![App Screenshot](image/homemenu.png)
-![App Screenshot](image/productmenu.png)
-![App Screenshot](image/submenu.png)
-![App Screenshot](image/datamenu.png)
-![App Screenshot](image/addfavmenu.png)
+
 ![App Screenshot](image/favmenu.png)
 
 
