@@ -91,3 +91,18 @@ class ProductManager:
                     .order_by(Product.product_name).limit(1))
 
 
+    def get_url_from_product(self, product):
+        """this method gets url from a product"""
+
+        self.query = product
+        
+        for product in (Product
+                        .select(Product.product_name, Product.url)
+                        .where(Product.product_name == self.query)
+                        .limit(3)):
+
+            print(product.product_name," url:", product.url)
+
+
+a = ProductManager()
+a.get_url_from_product("Tortillas chips nature")
