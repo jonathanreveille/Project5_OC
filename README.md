@@ -20,7 +20,7 @@ For this project, we had to create an application that allows the user seek for 
 Why seek for food alternatives?
 
 Because it seems that product nutrition tables aren't easy to 
-de-code in-store, this is why we generated this application in order 
+de-code in-store, this is why we have coded this application in order 
 to ease your daily life when you are seeking for healthier food 
 at your own neighborehood store. 
 Also, the french market has noticed an increase of interest 
@@ -29,18 +29,18 @@ and to put aside all products that are not healthy for humans.
 
 Nutriscore is a good indicator to the food we ingest, versus, 
 the lines of lies that we can find on packaging these
-days (many different scandales from 'apparently healthy products
+days (many different scandales from apparently healthy products
 and brands). This is why, we focus on providing healthier products
-to our users.
+to our users, according to **nutriscore**.
 
 So far this application works under the **terminal mode**.
 To ease its use, the virtual environment runs with pipenv.
 
-This program will allow you to save your findings 
-into favorites data if you are satisfied with the 
+This program will allow you to **save** your findings 
+into **favorites** data if you are satisfied with the 
 substitute product suggestions that you have selected.
-It also regroups product name, its nutriscore, its brand 
-and the store where it is available.
+It also regroups **product name**, its **nutriscore**, its **brand**
+and the **store** where it is available.
 
 
 ### Getting started:
@@ -51,7 +51,7 @@ First of all, first you need to **install pipenv**
 This will install all *requirements* that is required for 
 this project (peewee, pymsql, requests and python 3.7)
 
-The advantage of pipenv is that it is cross-platform. It is 
+The **advantage** of pipenv is that it is cross-platform. It is 
 recommended by the official documentation for python's virtual
 environment.
 
@@ -64,7 +64,7 @@ environment.
 
 ### More about the app architecture
 
-**Bdd folder** : Those scripts take care of : 
+**bdd folder** : Those scripts take care of : 
 * dbconnexion.py : it connects our script to our db for SQL
 * models.py : it creates all the different tables needed for this project
 (use of ***peewee*** ORM).
@@ -73,7 +73,7 @@ environment.
 application to work (get product, get category, get stores). It gets 
 data from the database, and shows it into the user interface.
 
-**Menu folder** : Those scripts take care of : 
+**menu folder** : Those scripts take care of : 
 * menu.py : it handles the menu behavior. Allows the developer 
 to implement additional menu option ("home" or/and "quit").
 It also allows our different menu to have a number to be selected
@@ -83,7 +83,7 @@ step of the program)
 * client.py : it's the user's interface. Each menu represent 
 a different step of how the program works.
 
-**Models folder** : Those scripts take care of : 
+**models folder** : Those scripts take care of : 
 * downloader.py : it connects to the OpenFoodFact API.
 It also cleans the data gathered from the API (it checks 
 if all keys we want are present, and if the keys we want have
