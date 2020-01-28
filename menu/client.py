@@ -154,9 +154,8 @@ class Client:
 
         # print("Dans self.params", self.params)
 
-        print("PLEASE FIND ADDITIONAL DATA ABOUT THE PRODUCT SELECTED \
-            (sometimes, product from different brands \
-            have the same product name) :  ")
+        print("PLEASE FIND ADDITIONAL DATA ABOUT THE SELECTED PRODUCT")
+        print("(sometimes, product from different brands have the same product name) : ")
 
         for product in self.product_manager.get_data_from_substitute(self.params["substitute"]):
             print(product.product_name.capitalize(), '>>> nutriscore : ', product.nutrition_grade_fr.upper(), "--",
@@ -189,7 +188,6 @@ class Client:
         for store in self.product_manager.get_store_name_for_product(self.params["substitute"]):
             self.stores.append(store)
             print("Store : ", store.store_name.capitalize())
-            # print("Store : ", store.store_name.capitalize())
 
         menu = Menu(["ADD TO FAVORITES ?"])
 
