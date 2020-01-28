@@ -90,7 +90,7 @@ class Client:
             break
 
     def menu2(self):  # UNHEALTHY PRODUCT MENU
-        """this method shows the menu of products for the user."""
+        """This method shows the menu of products for the user."""
 
         # print("Dans self.params", self.params)
 
@@ -118,9 +118,9 @@ class Client:
 
             break
 
-    def menu3(self):  # HEALTHY PRODUCT MENU
-        """THis method is to show the menu of substitutes products for the
-        user."""
+    def menu3(self):
+        """This method is to show the menu of substitutes
+        products for the user."""
 
         # print("Dans self.params", self.params)
 
@@ -148,7 +148,7 @@ class Client:
 
             break
 
-    def menu4(self):  # more info about product ?
+    def menu4(self):
         """this method shows the user addition data about the substituted
         product."""
 

@@ -98,10 +98,9 @@ class ProductManager:
         
         for product in (Product
                         .select(Product.product_name, Product.url)
-                        .where(Product.product_name == self.query)
-                        .limit(3)):
+                        .where(Product.product_name == self.query)):
 
-            print(product.product_name," url:", product.url)
+            print(f"url:", product.url)
 
 
 a = ProductManager()
