@@ -43,7 +43,7 @@ class Store(Base):  # a modifier comme dans l'exemple de la documentation (relat
 
 class Product(Base):
     code = BigIntegerField(primary_key=True)
-    product_name = CharField(max_length=255) #added unique
+    product_name = CharField(max_length=255)
     url = CharField(max_length=255, null=False)
     nutrition_grade_fr = CharField(max_length=1)
     brand = ForeignKeyField(Brand, backref="products")

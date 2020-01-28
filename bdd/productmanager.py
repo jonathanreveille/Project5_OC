@@ -88,4 +88,4 @@ class ProductManager:
 
         return list(Product.select()
                     .where(Product.product_name == self.query)
-                    .order_by(Product.product_name).limit(10))
+                    .order_by(Product.product_name).limit(1))

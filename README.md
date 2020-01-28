@@ -62,7 +62,7 @@ environment.
 * step2 : `pipenv run python -m menu.client` (launches the app)
 
 
-### More about the app
+### More about the app architecture
 
 **Bdd folder** : Those scripts take care of : 
 * dbconnexion.py : it connects our script to our db for SQL
