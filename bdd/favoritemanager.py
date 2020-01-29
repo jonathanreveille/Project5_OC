@@ -15,7 +15,7 @@ class FavoriteManager():
     def __str__(self):
         """returns a string of our object."""
 
-        return f"the original product is {self.original} is replaced by: {self.substitute}"
+        return f"{self.original} is replaced by: {self.substitute}"
 
     def save_to_favorites(self, original, substitute):
         """this method will join a product to replace by an healthier
@@ -32,7 +32,8 @@ class FavoriteManager():
             for substitute in substitutes:
                 sub_obj = Product.get(Product.product_name == self.substitute)
                 Favorite.get_or_create(
-                    substituted_product=product_obj, substitute_products=sub_obj)
+                                        substituted_product=product_obj,
+                                        substitute_products=sub_obj)
 
     def show_favorites(self):
         """this method shows the foreign keys of products that has been saved

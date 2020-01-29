@@ -5,5 +5,6 @@
 
 
 class UnvalidInput(Exception):
-    """A class when the user inserts an unvalid input."""
+    """ A class when the user inserts an unvalid input """
+
     pass

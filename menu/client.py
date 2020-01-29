@@ -2,6 +2,7 @@
 # coding : utf-8
 
 from .menu import MenuHome, Menu
+
 from bdd.productmanager import ProductManager
 from bdd.favoritemanager import FavoriteManager
 
@@ -9,6 +10,7 @@ from bdd.favoritemanager import FavoriteManager
 class Client:
 
     def __init__(self):
+
         self.running = False  # acts like a switch  ON/OFF
         self.next = self.menu0
         self.params = {}
@@ -94,7 +96,10 @@ class Client:
 
         # print("Dans self.params", self.params)
 
-        for product in self.product_manager.get_unhealthy_products(self.params["category"]):
+        for product in (
+            (self.product_manager.get_unhealthy_products(
+                self.params["category"])
+             )):
             self.product_list.append(product.product_name)
 
         menu = Menu(self.product_list)
@@ -121,8 +126,6 @@ class Client:
     def menu3(self):
         """This method is to show the menu of substitutes
         products for the user."""
-
-        # print("Dans self.params", self.params)
 
         for product in self.product_manager.get_healthy_products(self.params["category"]):
             self.substitute_list.append(product.product_name)
@@ -155,11 +158,14 @@ class Client:
         # print("Dans self.params", self.params)
 
         print("PLEASE FIND ADDITIONAL DATA ABOUT THE SELECTED PRODUCT")
-        print("(sometimes, product from different brands have the same product name) : ")
+        print("(sometimes, product from different brands,",
+              "have the same product name) : ")
 
         for product in self.product_manager.get_data_from_substitute(self.params["substitute"]):
-            print(" -  ", product.product_name.capitalize(), '>>> nutriscore : ', product.nutrition_grade_fr.upper(), "--",
-                  product.brand.brand_name,"-- more data :", product.url)
+            print(" -  ", product.product_name.capitalize(),
+                 '>>> nutriscore : ',
+                  product.nutrition_grade_fr.upper(), "--",
+                  product.brand.brand_name, "-- more data :", product.url)
 
         menu = Menu(["WHERE TO BUY IT ?"])
 
@@ -239,7 +245,7 @@ class Client:
             break
 
     def menu7(self):
-        """This menu shows all the products that have been 
+        """This menu shows all the products that have been
         saved by the user"""
 
         menu = Menu([])

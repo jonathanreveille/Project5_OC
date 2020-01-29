@@ -12,4 +12,7 @@ PORT = 3306
 CHARSET = 'utf8mb4'
 
 # For OpenFoodFact API
-CATEGORY_LIST = ["biscuits", "pizza", "jus de fruit", "chips", "confiture", "fromage"]
+CATEGORY_LIST = [
+    "biscuits", "pizza", "jus de fruit",
+                "chips", "confiture", "fromage"
+]

@@ -47,7 +47,9 @@ class ProductManager:
         self.query = category
 
         return list(Product
-                    .select(Product.product_name, Product.category, Product.nutrition_grade_fr)
+                    .select(Product.product_name,
+                            Product.category,
+                            Product.nutrition_grade_fr)
                     .join(Category)
                     .where(
                         (Category.category_name == self.query)
@@ -63,7 +65,9 @@ class ProductManager:
         self.query = category
 
         return list(Product
-                    .select(Product.product_name, Product.category, Product.nutrition_grade_fr)
+                    .select(Product.product_name,
+                            Product.category,
+                            Product.nutrition_grade_fr)
                     .join(Category)
                     .where(
                         (Category.category_name == self.query)
@@ -90,12 +94,11 @@ class ProductManager:
                     .where(Product.product_name == self.query)
                     .order_by(Product.product_name).limit(1))
 
-
     def get_url_from_product(self, product_name):
         """this method gets url from a product name"""
 
         self.query = product_name
-        
+
         for product in (Product
                         .select(Product.product_name, Product.url)
                         .where(Product.product_name == self.query)):

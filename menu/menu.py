@@ -86,7 +86,7 @@ class Menu:
     def is_valid_choice(self, choice):
         """  this method is  to  verify if the  choosen
         option is available in the menu """
-        
+
         if not choice.isdigit():  # if choice is not a number
             return False
 
