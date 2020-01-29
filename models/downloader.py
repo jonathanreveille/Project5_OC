@@ -115,7 +115,7 @@ class ProductDownloader:
         self.fetch_data_from_API()
         self.get_product_data()
         self.fill_product()
-        print("Thanks for waiting ! All data are in your db now")
+        print("Thanks for waiting ! One of your categories is in your db now")
 
 
 def main():
