@@ -158,7 +158,7 @@ class Client:
         print("(sometimes, product from different brands have the same product name) : ")
 
         for product in self.product_manager.get_data_from_substitute(self.params["substitute"]):
-            print(product.product_name.capitalize(), '>>> nutriscore : ', product.nutrition_grade_fr.upper(), "--",
+            print(" -  ", product.product_name.capitalize(), '>>> nutriscore : ', product.nutrition_grade_fr.upper(), "--",
                   product.brand.brand_name,"-- more data :", product.url)
 
         menu = Menu(["WHERE TO BUY IT ?"])
@@ -239,8 +239,8 @@ class Client:
             break
 
     def menu7(self):
-        """this menu shows all the products that have been saved by the
-        user."""
+        """This menu shows all the products that have been 
+        saved by the user"""
 
         menu = Menu([])
 
