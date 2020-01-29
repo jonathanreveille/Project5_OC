@@ -9,7 +9,7 @@ Here is the [link](https://github.com/jonathanreveille/Project5_OC.git) to the p
 
 ### What is in this project ?
 - Use of OOP
-- Use of pipenv (virtual environment with Python 3)
+- Use of pipenv (virtual environment with Python 3.7)
 - Use of Peewee ORM [link](http://docs.peewee-orm.com/en/latest/)
 - Respect and follow recommendations from PEP8(style guide),
  PEP257(docformatter)
@@ -64,7 +64,7 @@ environment.
 
 ### More about the app architecture
 
-**bdd folder** : Those scripts take care of : 
+**Pagacke bdd** : Those scripts take care of : 
 * dbconnexion.py : it connects our script to our db for SQL
 * models.py : it creates all the different tables needed for this project
 (use of ***peewee*** ORM).
@@ -73,7 +73,7 @@ environment.
 application to work (get product, get category, get stores). It gets 
 data from the database, and shows it into the user interface.
 
-**menu folder** : Those scripts take care of : 
+**Package menu** : Those scripts take care of : 
 * menu.py : it handles the menu behavior. Allows the developer 
 to implement additional menu option ("home" or/and "quit").
 It also allows our different menu to have a number to be selected
@@ -83,19 +83,19 @@ step of the program)
 * client.py : it's the user's interface. Each menu represent 
 a different step of how the program works.
 
-**models folder** : Those scripts take care of : 
+**Package models** : Those scripts take care of : 
 * downloader.py : it connects to the OpenFoodFact API.
 It also cleans the data gathered from the API (it checks 
 if all keys we want are present, and if the keys we want have
 avalue attached to it). Finally, it sends the data (list) into our 
 database, by creating, new objects into our tables.
 
-**settings folder**:
+**Package settings**:
 * config.py : it handles constants, in our case, the category
 list. If you want to add more categories, just had a string object
 into the existing list CATEGORY_LIST (e.g : "pains", or "bread")
 
-**sql folder** :
+**Package sql** :
 * Entity Relationship diagram of the database
 * SQL code to create database if you want. By the way, the script
 models.downloader.py handles it already.
