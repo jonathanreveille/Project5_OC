@@ -3,7 +3,7 @@
 
 from peewee import fn
 
-from .models import Category, Product, Store, ProductStore
+from .models import Category, Product, Store, ProductStore, Brand
 
 """ this module will have the responsibility
 to be able to search through our data """
@@ -94,17 +94,29 @@ class ProductManager:
                     .where(Product.product_name == self.query)
                     .order_by(Product.product_name).limit(1))
 
-    def get_url_from_product(self, product_name):
+
+    def get_url_from_product(self, product_name, brand):
         """this method gets url from a product name"""
 
         self.query = product_name
+        self.brand = brand
 
-        for product in (Product
-                        .select(Product.product_name, Product.url)
-                        .where(Product.product_name == self.query)):
+        for product in (Product.select(Product)
+                        .join(Brand)
+                        .where(
+                            (Product.product_name == self.query)
+                            &(Product.brand.brand_name == self.brand)
+                            )):
+                            #&(Product.brand.brand_name == self.brand))):
+            
+            print(product.product_name, "--> url :", product.url)
+                        
 
-            print(f"url:", product.url)
+
+        # return list(Product
+        #             .select(Product.product_name, Product.url)
+        #             .where((Product.product_name == self.query)))
 
 
-# a = ProductManager()
-# a.get_url_from_product("Tortillas chips nature")
+a = ProductManager()
+a.get_url_from_product("Biscuits tablette chocolat noir", "Sondey")

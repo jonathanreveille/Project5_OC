@@ -163,7 +163,7 @@ class Client:
 
         for product in self.product_manager.get_data_from_substitute(self.params["substitute"]):
             print(" -  ", product.product_name.capitalize(),
-                 '>>> nutriscore : ',
+                  '>>> nutriscore : ',
                   product.nutrition_grade_fr.upper(), "--",
                   product.brand.brand_name, "-- more data :", product.url)
 

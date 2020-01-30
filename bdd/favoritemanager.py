@@ -32,8 +32,8 @@ class FavoriteManager():
             for substitute in substitutes:
                 sub_obj = Product.get(Product.product_name == self.substitute)
                 Favorite.get_or_create(
-                                        substituted_product=product_obj,
-                                        substitute_products=sub_obj)
+                    substituted_product=product_obj,
+                    substitute_products=sub_obj)
 
     def show_favorites(self):
         """this method shows the foreign keys of products that has been saved
