@@ -31,6 +31,7 @@ class FavoriteManager():
 
             for substitute in substitutes:
                 sub_obj = Product.get(Product.product_name == self.substitute)
+
                 Favorite.get_or_create(
                     substituted_product=product_obj,
                     substitute_products=sub_obj)
