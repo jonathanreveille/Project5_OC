@@ -152,22 +152,11 @@ class Client:
             break
 
     def menu4(self):
-        """this method shows the user addition data about the substituted
-        product."""
+        """This method shows the store where we can buy the product."""
 
-        # print("Dans self.params", self.params)
+        print("Dans self.params: ", self.params)
 
-        print("PLEASE FIND ADDITIONAL DATA ABOUT THE SELECTED PRODUCT")
-        print("(sometimes, product from different brands,",
-              "have the same product name) : ")
-
-        for product in self.product_manager.get_data_from_substitute(self.params["substitute"]):
-            print(" -  ", product.product_name.capitalize(),
-                  '>>> nutriscore : ',
-                  product.nutrition_grade_fr.upper(), "--",
-                  product.brand.brand_name, "-- more data :", product.url)
-
-        menu = Menu(["WHERE TO BUY IT ?"])
+        menu = Menu(["ADD TO FAVORITES?"])
 
         while True:
             print(menu)
@@ -175,7 +164,6 @@ class Client:
 
             if menu.is_valid_choice(choice):
                 entry = menu[choice]
-                self.params["Where to buy"] = entry
                 self.next = self.menu5
 
                 if entry == "QUIT":
@@ -184,39 +172,13 @@ class Client:
                 elif entry == "HOME":
                     self.next = self.back_home
 
-            break
+            break  
 
     def menu5(self):
-        """This method shows the store where we can buy the product."""
-
-        self.stores = []
-
-        for store in self.product_manager.get_store_name_for_product(self.params["substitute"]):
-            self.stores.append(store)
-            print("Store : ", store.store_name.capitalize())
-
-        menu = Menu(["ADD TO FAVORITES ?"])
-
-        while True:
-            print(menu)
-            choice = input(">> ")
-
-            if menu.is_valid_choice(choice):
-                entry = menu[choice]
-                # self.params["favorite"] = entry
-                self.next = self.menu6
-
-                if entry == "QUIT":
-                    self.next = self.quit_app
-
-                elif entry == "HOME":
-                    self.next = self.back_home
-
-            break
-
-    def menu6(self):
         """this method is the menu where all favorite products were saved by
         the user."""
+
+        print("Dans self.params: ", self.params)
 
         self.original = self.params["product"]
         self.substitute = self.params["substitute"]
@@ -234,7 +196,7 @@ class Client:
             if menu.is_valid_choice(choice):
                 entry = menu[choice]
                 self.params["favorite"] = entry
-                self.next = self.menu7
+                self.next = self.menu6
 
                 if entry == "QUIT":
                     self.next = self.quit_app
@@ -244,7 +206,7 @@ class Client:
 
             break
 
-    def menu7(self):
+    def menu6(self):
         """This menu shows all the products that have been
         saved by the user"""
 
@@ -256,9 +218,9 @@ class Client:
 
                 print(
                     f" -  {favorite.substitute_products.product_name}, ({favorite.substitute_products.nutrition_grade_fr.upper()})")
-                print(
-                    f"    Brand : {favorite.substitute_products.brand.brand_name}")
+                print(f"    Brand : {favorite.substitute_products.brand.brand_name}")
                 print(f"    URL : {favorite.substitute_products.url}")
+
                 print(f"    Stores : ", end="")
 
                 stores = []
@@ -315,3 +277,101 @@ class Client:
 
 client = Client()
 client.start()
+
+
+
+  # def menu4(self):
+    #     """this method shows the user addition data about the substituted
+    #     product."""
+
+    #     # print("Dans self.params", self.params)
+
+    #     print("PLEASE FIND ADDITIONAL DATA ABOUT THE SELECTED PRODUCT")
+    #     print("(sometimes, product from different brands,",
+    #           "have the same product name). So, please select one of them: ")
+        
+    #     sub_products = []
+
+    #     while True:
+
+    #         for product in self.product_manager.get_data_from_substitute(self.params["substitute"]):
+    #             sub_products.append(f"{product.product_name}")
+
+    #             menu = Menu(sub_products)
+
+    #         print(menu)
+
+    #         choice = input(">> ")
+
+    #         if menu.is_valid_choice(choice):
+    #             entry = menu[choice]
+    #             self.params["selected_sub"] = entry
+    #             self.next = self.menu5
+
+    #             if entry == "QUIT":
+    #                 self.next = self.quit_app
+
+    #             elif entry == "HOME":
+    #                 self.next = self.back_home
+
+    #         break
+            #F"string to put multiple values in list
+
+            # print(" -  ", product.product_name.capitalize(),
+            #       '>>> nutriscore : ',
+            #       product.nutrition_grade_fr.upper(), "--",
+            #       product.brand.brand_name, "-- more data :", product.url)
+
+
+    # def menu4(self): # ORIGINal Works but does not allow you toselect one out of many products  with same product_name
+    #     """this method shows the user addition data about the substituted
+    #     product."""
+
+    #     print("Dans self.params", self.params)
+
+    #     print("PLEASE FIND ADDITIONAL DATA ABOUT THE SELECTED PRODUCT")
+    #     print("(sometimes, product from different brands,",
+    #           "have the same product name) : ")
+
+    #     for product in self.product_manager.get_data_from_substitute(self.params["substitute"]):
+    #         print(" -  ", product.product_name.capitalize(),
+    #               '>>> nutriscore : ',
+    #               product.nutrition_grade_fr.upper(), "--",
+    #               product.brand.brand_name, "-- more data :", product.url)
+
+    #     menu = Menu(["ADD TO FAVORITE ?"])
+
+    #     while True:
+    #         print(menu)
+    #         choice = input(">> ")
+
+    #         if menu.is_valid_choice(choice):
+    #             entry = menu[choice]
+    #             self.params["add_to_fav"] = entry
+    #             self.next = self.menu5
+
+    #             if entry == "QUIT":
+    #                 self.next = self.quit_app
+
+    #             elif entry == "HOME":
+    #                 self.next = self.back_home
+
+    #         break
+
+
+
+
+        #MENU 5 beggining before menu = Menu()
+        # self.stores = []
+
+        # for store in self.product_manager.get_store_name_for_product(self.params["substitute"]):
+        #     self.stores.append(store)
+        #     print("Store : ", store.store_name.capitalize())
+
+ 
+
+                # urls = []
+                # for product in self.product_manager.get_url_from_product(favorite.substitute_products):  #print(f"    URL : {favorite.substitute_products.url}") OK
+                #     urls.append(product.product.url)
+
+                #     print("--".join(urls))

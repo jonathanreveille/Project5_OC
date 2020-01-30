@@ -95,13 +95,14 @@ class ProductManager:
                     .order_by(Product.product_name)) # .limit(1))
 
 
-    def get_url_from_product(self, product_name, brand):
-        """this method gets url from a product name"""
+    def get_url_from_product(self, product_name):
+        """This method is to get specific product
+        from the database"""
 
         self.query = product_name
-        self.brand = brand
 
         return list(Product.select(Product)
+<<<<<<< HEAD
                         .join(Brand)
                         .where(
                             (Product.product_name == self.query)
@@ -119,12 +120,26 @@ class ProductManager:
             
         #     print(product.product_name, "--> url :", product.url)
                         
+=======
+                        .where(
+                            (Product.product_name == self.query)))
 
 
-        # return list(Product
-        #             .select(Product.product_name, Product.url)
-        #             .where((Product.product_name == self.query)))
 
 
-a = ProductManager()
-a.get_url_from_product("Biscuits tablette chocolat noir", "Sondey")
+
+#self.brand = brand
+#&(Product.brand.brand_name == self.brand))):
+
+# print(product.product_name, "--> url :", product.url)
+            
+>>>>>>> subs
+
+
+# return list(Product
+#             .select(Product.product_name, Product.url)
+#             .where((Product.product_name == self.query)))
+
+
+# a = ProductManager()
+# a.get_url_from_product("Biscuits tablette chocolat noir", "Sondey")
