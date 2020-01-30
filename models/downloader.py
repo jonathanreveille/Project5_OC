@@ -29,7 +29,7 @@ class ProductDownloader:
     def check_connexion(self):
         """ This method is to download all data needed
         from the URL,
-        output = if <Response 200> params
+        output = if <Response 200> params : OK
         and url == everything is well set"""
 
         connexion = True
@@ -43,8 +43,8 @@ class ProductDownloader:
             print("<<Connected to API, loading...>>")
 
     def fetch_data_from_API(self):
-        """This method is to transform what we received from the API into .json
-        format.
+        """This method is to transform what we received from 
+        the API into .json format.
 
         We get in return a dictionnary field with data
         """
@@ -86,7 +86,7 @@ class ProductDownloader:
         return self.product_list  # return a dict
 
     def fill_product(self):
-        """this method is filter all our stores."""
+        """This method is filter all our stores."""
 
         category, created = Category.get_or_create(category_name=self.category)
 
@@ -108,7 +108,7 @@ class ProductDownloader:
                 ProductStore.get_or_create(product=product_obj, store=store)
 
     def create_object_by_category(self):
-        """this module is to create all the different categories that we will
+        """This module is to create all the different categories that we will
         need for our application."""
 
         self.check_connexion()
@@ -119,11 +119,15 @@ class ProductDownloader:
 
 
 def main():
-    """In this main, you manage your categories."""
+    """In this main, you manage your categories
+    that will be inserted to your database."""
 
     for category in CATEGORY_LIST:
         cat = ProductDownloader(category)
         cat.create_object_by_category()
+        continue
+
+    print("Done ! All the data is in your database")
 
 
 if __name__ == "__main__":

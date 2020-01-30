@@ -13,6 +13,6 @@ CHARSET = 'utf8mb4'
 
 # For OpenFoodFact API
 CATEGORY_LIST = [
-    "biscuits", "pizza", "jus de fruit",
+    "biscuits", "pizza", "jus de fruit", "chips",
                 "pâte à tartiner", "confiture", "fromage"
 ]

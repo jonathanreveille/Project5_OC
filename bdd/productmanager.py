@@ -82,7 +82,7 @@ class ProductManager:
         return list(Store.select()
                     .join(ProductStore)
                     .join(Product)
-                    .where(Product.product_name == self.query).limit(1))
+                    .where(Product.product_name == self.query)) # .limit(1))
 
     def get_data_from_substitute(self, product):
         """this method is to get all the additionnal information about a
@@ -92,7 +92,7 @@ class ProductManager:
 
         return list(Product.select()
                     .where(Product.product_name == self.query)
-                    .order_by(Product.product_name).limit(1))
+                    .order_by(Product.product_name)) # .limit(1))
 
 
     def get_url_from_product(self, product_name, brand):
@@ -101,15 +101,23 @@ class ProductManager:
         self.query = product_name
         self.brand = brand
 
-        for product in (Product.select(Product)
+        return list(Product.select(Product)
                         .join(Brand)
                         .where(
                             (Product.product_name == self.query)
                             &(Product.brand.brand_name == self.brand)
-                            )):
-                            #&(Product.brand.brand_name == self.brand))):
+                            ))
+
+
+        # for product in (Product.select(Product)
+        #                 .join(Brand)
+        #                 .where(
+        #                     (Product.product_name == self.query)
+        #                     &(Product.brand.brand_name == self.brand)
+        #                     )):
+        #                     #&(Product.brand.brand_name == self.brand))):
             
-            print(product.product_name, "--> url :", product.url)
+        #     print(product.product_name, "--> url :", product.url)
                         
 
 
