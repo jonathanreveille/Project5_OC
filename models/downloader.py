@@ -43,7 +43,7 @@ class ProductDownloader:
             print("<<Connected to API, loading...>>")
 
     def fetch_data_from_API(self):
-        """This method is to transform what we received from
+        """This method transforms what we received from
         the API into .json format.
 
         We get in return a dictionnary field with data
@@ -59,8 +59,8 @@ class ProductDownloader:
         """This method to validate the data that is present and complete.
 
         --> we create a list of fields we want to search;
-        --> check if the key exists;
-        --> check if value exists for the key
+        --> check if the key (field) exists;
+        --> check if a value exists for the key
         """
 
         fields = ["product_name", "nutrition_grade_fr",
@@ -72,8 +72,8 @@ class ProductDownloader:
         return True
 
     def get_product_data(self):
-        """This method is to add to at our product [list] only the values from
-        the keys that we need."""
+        """This method is to add to our product [list] only the values from
+        the keys that we need and want."""
 
         self.product_list = []
 
@@ -86,7 +86,7 @@ class ProductDownloader:
         return self.product_list  # return a dict
 
     def fill_product(self):
-        """This method is to create all objects in database."""
+        """This method is to create all objects in our database."""
 
         category, created = Category.get_or_create(category_name=self.category)
 

@@ -11,7 +11,7 @@ from .models import (
 )
 
 """ This module will have the responsibility
-to be able to search through our data """
+to be able to search through our existing data """
 
 
 class ProductManager:
@@ -20,7 +20,7 @@ class ProductManager:
         self.query = []
 
     def get_all_products_from_db(self):
-        """this method is to access all product name from  db."""
+        """this method is to access all product name from db."""
 
         for product in (
             Product.select()
@@ -36,7 +36,7 @@ class ProductManager:
         return list(Category.select())
 
     def get_products_from_category(self, category):
-        """This method is to get all products from a category."""
+        """this method is to get all products from a category."""
 
         self.query = category
 

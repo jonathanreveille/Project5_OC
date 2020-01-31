@@ -3,6 +3,36 @@
 
 ## :snake: Python App Development - Project 5 - Purbeurre - OC
 
+
+## Package models
+
+*downloader.py*
+
+- Class Downloader
+
+- Function check_connexion(self): This method is to download all data needed
+from the URL, output = if <Response 200> params : OK
+and url == everything is well set.
+
+- Function fetch_data_from_API(self):
+This method transforms what we received from the API into .json format.
+We get in return a dictionnary with {field : data}.
+
+- Function is_valid_data(self, product):
+This method is to validate the data that is present and complete.
+        --> we create a list of fields we want to search and get;
+        --> check if the key (field) exists;
+        --> check if a value exists for the key.
+
+- Function get_product_data(self): This method is to add to our product (list) only the values from
+the keys that we want. 
+
+- Function fill_product(self): This method is to create all objects in our database.
+
+- Function create_object_by_category(self): This module is to create all the different categories
+that we will need for our application.
+
+
 ## Package bdd : 
 
 *dbconnexion.py*
@@ -22,7 +52,7 @@ Save = True; is the equivalent of : DROP IF EXISTS in SQL language.
 
 - Class ProductManager
 
-- Function get_all_products_from_db(self): this method is to access all product name from database.
+- Function get_all_products_from_db(self): this method is to access to all product names from the database.
 
 - Function get_all_category(self): this method is to get all categories from the database.
 
@@ -89,35 +119,3 @@ search from user's session.
 
 - Function quit_app(self): This method manages the option quit 1 from the menu for the client's interface.
 
-
-
-## Package models
-
-*downloader.py*
-
-- Class Downloader
-
-- Function check_connexion(self):
-This method is to download all data needed
-from the URL,
-output = if <Response 200> params : OK
-and url == everything is well set.
-
-- Function fetch_data_from_API(self):
-This method is to transform what we received from the API into .json format.
-We get in return a dictionnary field with data.
-
-- Function is_valid_data(self, product):
-This method to validate the data that is present and complete.
-        --> we create a list of fields we want to search;
-        --> check if the key exists;
-        --> check if value exists for the key.
-
-- Function get_product_data(self):
-This method is to add to at our product (list) only the values from
-the keys that we need.
-
-- Function fill_product(self): This method is to create all objects in database.
-
-- Function create_object_by_category(self): This module is to create all the different categories
-that we will need for our application.
