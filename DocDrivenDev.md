@@ -1,4 +1,3 @@
-*This is the fifth project in part of the Python course at OC*
 
 # Doc Driven Development
 
@@ -6,12 +5,12 @@
 
 ## Package bdd : 
 
-dbconnexion.py
+*dbconnexion.py*
 
 - code to connect to database
 
 
-models.py
+*models.py*
 
 - Create all tables with PEEWEE syntax (Brand, Store, Category, Product, ProductStore, Favorite)
 
@@ -19,7 +18,7 @@ models.py
 Save = True is the equivalent : DROP IF EXISTS in SQL language.
 
 
-productmanager.py :
+*productmanager.py*
 
 - function get_all_products_from_db(self): this method is to access all product name from database.
 
@@ -48,7 +47,7 @@ favoritemanager.py :
 
 ## Package menu :
 
-menu.py:
+*menu.py*
 
 - class Menu and MenuHome
 
@@ -58,7 +57,7 @@ menu.py:
 option is available in the menu """
 
 
-client.py:
+*client.py*
 
 - menu0(self): This menu will ask user what he wishes to do on the application.
 
@@ -90,7 +89,7 @@ interface.
 ## Package models
 
 
-downloader.py:
+*downloader.py*
 
 - function check_connexion(self):
 This method is to download all data needed
