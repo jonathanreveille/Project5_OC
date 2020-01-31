@@ -6,6 +6,19 @@
 
 ## Package bdd : 
 
+dbconnexion.py
+
+- code to connect to database
+
+
+models.py
+
+- Create all tables with PEEWEE syntax (Brand, Store, Category, Product, ProductStore, Favorite)
+
+- Function to create_tables (safe=True).
+Save = True is the equivalent : DROP IF EXISTS in SQL language.
+
+
 productmanager.py :
 
 - function get_all_products_from_db(self): this method is to access all product name from database.
@@ -76,6 +89,7 @@ interface.
 
 ## Package models
 
+
 downloader.py:
 
 - function check_connexion(self):
@@ -102,8 +116,7 @@ the keys that we need."""
 - function fill_product(self): This method is to create all objects in database.
 
 
-- create_object_by_category(self):
-This module is to create all the different categories that we will
-need for our application.
+- function create_object_by_category(self): This module is to create all the different categories
+that we will need for our application.
 
 
