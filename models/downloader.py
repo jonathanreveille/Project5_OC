@@ -43,7 +43,7 @@ class ProductDownloader:
             print("<<Connected to API, loading...>>")
 
     def fetch_data_from_API(self):
-        """This method is to transform what we received from 
+        """This method is to transform what we received from
         the API into .json format.
 
         We get in return a dictionnary field with data

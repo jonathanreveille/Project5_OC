@@ -34,7 +34,8 @@ class Brand(Base):
         table_name = "brand"
 
 
-class Store(Base):  # a modifier comme dans l'exemple de la documentation (relation ManyToMany avec Product et Store)
+class Store(Base):
+    # relation ManyToMany avec Product et Store
     store_name = CharField(unique=True)
 
     class Meta:  # additional information
@@ -47,7 +48,7 @@ class Product(Base):
     url = CharField(max_length=255, null=False)
     nutrition_grade_fr = CharField(max_length=1)
     brand = ForeignKeyField(Brand, backref="products")
-    # backref va créer un attribut dans mes objets de type catégory. un attribut qui me permet  d'acceder à un
+    # backref va créer un attribut dans mes objets de type catégory
     category = ForeignKeyField(Category, backref="products")
 
     class Meta:
