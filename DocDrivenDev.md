@@ -55,7 +55,7 @@ product that is saved into the Favorite table.
 
 - Class Menu and MenuHome
 
-- __getitem__(self, choice):this method  is  to  select  an option from the menu, it will check  if the menu option exists.
+- __getitem__(self, choice): this method  is  to  select  an option from the menu, it will check  if the menu option exists.
 
 - Function is_valid_choice(self, choice): this method is  to  verify if the  choosen
 option is available in the menu.
@@ -65,22 +65,24 @@ option is available in the menu.
 
 - Class Client
 
-- Function menu0(self): This menu will ask user what he wishes to do on the application.
+- Function menu0(self): this menu will ask user what he wishes to do on the application.
 
-- Function menu1(self): CATEGORY MENU
-this method shows all the present categories to the user in this menu.
+- Function menu1(self): CATEGORY MENU,
+This method shows all the present categories to the user in this menu.
 
-- Function menu2(self): UNHEALTHY PRODUCT MENU
+- Function menu2(self): UNHEALTHY PRODUCT MENU,
 This method shows the menu of products for the user. 
 
-- Function menu3(self): This method is to show the menu of substitutes products for the user.
+- Function menu3(self): HEALTHY PRODUCT MENU,
+This method is to show the menu of substitutes products for the user.
 
-- Function menu4(self): This method shows the store where we can buy the product.
 
-- Function menu5(self): this method is the menu where all favorite products were saved by
-the user.
+- Function menu4(self): This method ask if the user wants to add to favorite the product he selected from the healthy list of products.
 
-- Function menu6(self): This menu shows all the products that have been saved by the user
+- Function menu5(self): This method warns the user that his search has been
+saved to his favorites, and it asks him if he wants to go his favorite menu.
+
+- Function menu6(self): This menu shows all the products that have been saved to Favorites by the user.
 
 - Function back_home(self): This method is to get back at the main menu deleting all other past
 search from user's session.

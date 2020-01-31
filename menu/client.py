@@ -154,7 +154,9 @@ class Client:
             break
 
     def menu4(self):
-        """This method shows the store where we can buy the product."""
+        """This method ask if the user wants to add
+        to favorite the product he selected from
+        the healthy list of products"""
 
         print("Dans self.params: ", self.params)
 
@@ -177,8 +179,9 @@ class Client:
             break
 
     def menu5(self):
-        """this method is the menu where all favorite products were saved by
-        the user."""
+        """This method warns the user that his search has been
+        saved to his favorites, and it asks him if he wants to
+        go his favorite menu."""
 
         print("Dans self.params: ", self.params)
 
@@ -210,7 +213,7 @@ class Client:
 
     def menu6(self):
         """This menu shows all the products that have been
-        saved by the user"""
+        saved to Favorites by the user"""
 
         menu = Menu([])
 
