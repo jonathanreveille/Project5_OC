@@ -86,7 +86,7 @@ class ProductDownloader:
         return self.product_list  # return a dict
 
     def fill_product(self):
-        """This method is filter all our stores."""
+        """This method is to create all objects in database."""
 
         category, created = Category.get_or_create(category_name=self.category)
 
