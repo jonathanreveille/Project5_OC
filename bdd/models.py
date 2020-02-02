@@ -35,7 +35,7 @@ class Brand(Base):
 
 
 class Store(Base):
-    # relation ManyToMany avec Product et Store
+    # relation ManyToMany with  Product et Store
     store_name = CharField(unique=True)
 
     class Meta:  # additional information
