@@ -158,7 +158,7 @@ class Client:
         to favorite the product he selected from
         the healthy list of products"""
 
-        print("Dans self.params: ", self.params)
+        #print("Dans self.params: ", self.params)
 
         menu = Menu(["ADD TO FAVORITES?"])
 
@@ -183,7 +183,7 @@ class Client:
         saved to his favorites, and it asks him if he wants to
         go his favorite menu."""
 
-        print("Dans self.params: ", self.params)
+        #print("Dans self.params: ", self.params)
 
         self.original = self.params["product"]
         self.substitute = self.params["substitute"]
