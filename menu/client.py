@@ -219,18 +219,18 @@ class Client:
 
         while True:
 
-            for favorite in self.favorite_manager.show_favorites():
+            for fav in self.favorite_manager.show_favorites():
 
                 print(
-                    f" -  {favorite.substitute_products.product_name},"
-                    f"({favorite.substitute_products.nutrition_grade_fr.upper()})"
+                    f" -  {fav.substitute_products.product_name},"
+                    f"({fav.substitute_products.nutrition_grade_fr.upper()})"
                 )
                 print(
                     f"    Brand : "
-                    f"{favorite.substitute_products.brand.brand_name.capitalize()}"
+                    f"{fav.substitute_products.brand.brand_name.capitalize()}"
                 )
                 print(
-                    f"    URL : {favorite.substitute_products.url}"
+                    f"    URL : {fav.substitute_products.url}"
                 )
 
                 print(f"    Stores : ", end="")
@@ -238,7 +238,7 @@ class Client:
                 stores = []
 
                 for store in self.product_manager.get_store_name_for_product(
-                    favorite.substitute_products.product_name
+                    fav.substitute_products.product_name
                 ):
                     stores.append(store.store_name.upper())
 
