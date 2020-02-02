@@ -72,8 +72,8 @@ class ProductDownloader:
         return True
 
     def get_product_data(self):
-        """This method is to add to our product [list] only the values from
-        the keys that we need and want."""
+        """This method is to add to our product [list] only the values
+        from the keys that we need and want."""
 
         self.product_list = []
 

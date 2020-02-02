@@ -48,7 +48,6 @@ class Product(Base):
     url = CharField(max_length=255, null=False)
     nutrition_grade_fr = CharField(max_length=1)
     brand = ForeignKeyField(Brand, backref="products")
-    # backref va créer un attribut dans mes objets de type catégory
     category = ForeignKeyField(Category, backref="products")
 
     class Meta:
