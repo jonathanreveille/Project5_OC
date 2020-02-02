@@ -83,7 +83,7 @@ class ProductDownloader:
                 # contains only element with searched fields
                 self.product_list.append(product)
 
-        return self.product_list  # return a dict
+        return self.product_list
 
     def fill_product(self):
         """This method is to create all objects in our database."""
